@@ -28,6 +28,7 @@ make yes-user-uefex
 Finally, compile LAMMPS.
 
 ```
+cd lammps-*/src/
 make mpi
 ```
 
