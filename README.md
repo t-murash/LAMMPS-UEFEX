@@ -5,7 +5,7 @@ The extensional package for the USER-UEF package in LAMMPS.
 This package is compiled within LAMMPS and depends on the original USER-UEF package.
 Download and install LAMMPS and the USER-UEF package according to the following site.
 
-[UEF](https://github.com/RutledgeGroupMIT/UEF)
+-[UEF](https://github.com/RutledgeGroupMIT/UEF)
 
 ```
 wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
