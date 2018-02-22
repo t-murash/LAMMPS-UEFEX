@@ -1,7 +1,7 @@
 # USER-UEFEX
 The extensional package for the USER-UEF package in LAMMPS. This package is useful for Langevin dynamics and dissipative particle dynamics to apply uniform extensional flow.
 
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/gif/movie.gif" title="N=100, M=100 Kremer-Grest chains" width=300/>
+<img src="https://github.com/t-murash/USER-UEFEX/blob/master/gif/movie.gif" title="N=100, M=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
 
 
