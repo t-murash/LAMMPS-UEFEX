@@ -30,3 +30,9 @@ Finally, compile LAMMPS.
 ```
 make mpi
 ```
+
+## Usage
+You can find example files in `USER-UEF-master/examples`.
+```
+mpirun ./lmp_mpi -in in.example
+```
