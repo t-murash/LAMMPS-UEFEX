@@ -5,8 +5,8 @@ The extensional package for the USER-UEF package in LAMMPS. This package is usef
 
 Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
-Tohoku University<br>
-Initial commit: Feb 22, 2018<br><br>
+Tohoku University, Japan<br>
+Initial commit: Feb 22, 2018<br>
 Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 ## Installation
