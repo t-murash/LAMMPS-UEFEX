@@ -1,5 +1,13 @@
 # USER-UEFEX
-The extensional package for the USER-UEF package in LAMMPS.
+The extensional package for the USER-UEF package in LAMMPS. This package is useful for Langevin dynamics and dissipative particle dynamics to apply uniform extensional flow.
+
+<img src="" width=300/>
+
+Authored by:
+[Takahiro Murashima](https://github.com/t-murash)<br>
+Tohoku University<br>
+Initial commit: Feb 22, 2018<br><br>
+Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 ## Installation
 This package is compiled within LAMMPS and depends on the original USER-UEF package.
