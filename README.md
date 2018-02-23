@@ -43,7 +43,7 @@ make mpi
 ```
 
 ## Usage
-You can find several example files in `USER-UEFEX-master/USER-UEFEX/examples`.
+You can find several example files in `USER-UEFEX-master/examples`.
 ```
 mpirun ./lmp_mpi -in in.example
 ```
