@@ -54,4 +54,4 @@ Users of this package are encouraged to cite the following articles in scientifi
 
 * D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.*, 2016, **145** (24), http://aip.scitation.org/doi/full/10.1063/1.4972894.
 
-* T. Murashima, K. Hagita, T. Kawakatsu, "Elongational viscosity of weakly entangled polymer melt via coarse-grained molecular dynamics simulation", in preparation.
+* T. Murashima, K. Hagita, T. Kawakatsu, "Elongational viscosity of weakly entangled polymer melt via coarse-grained molecular dynamics simulation", http://arxiv.org/abs/1803.01517.
