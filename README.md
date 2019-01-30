@@ -18,6 +18,8 @@ Download and install LAMMPS and the USER-UEF package according to the following 
 * [LAMMPS](https://lammps.sandia.gov/)
 * [RutledgeGroupMIT/UEF](https://github.com/RutledgeGroupMIT/UEF)
 
+    (The USER-UEF package has already been included in LAMMPS.)
+
 ```
 wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
 tar xvf lammps-stable.tar.gz
