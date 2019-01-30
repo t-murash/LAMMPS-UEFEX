@@ -17,8 +17,7 @@ This package is compiled within LAMMPS and depends on the original USER-UEF pack
 Download and install LAMMPS and the USER-UEF package according to the following site.
 * [LAMMPS](https://lammps.sandia.gov/)
 * [RutledgeGroupMIT/UEF](https://github.com/RutledgeGroupMIT/UEF)
-
-    (The USER-UEF package has already been included in LAMMPS.)
+(The USER-UEF package has already been included in LAMMPS)
 
 ```
 wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
@@ -28,7 +27,7 @@ make yes-molecule
 make yes-user-uef
 ```
 
-Then, get this package and install
+Then, get this package and install.
 
 ```
 git clone https://github.com/t-murash/USER-UEFEX.git
