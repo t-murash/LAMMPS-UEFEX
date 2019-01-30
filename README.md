@@ -30,7 +30,7 @@ Then, get this package and install
 
 ```
 git clone https://github.com/t-murash/USER-UEFEX.git
-cp -r USER-UEFEX-master/USER-UEFEX/ lammps-*/src
+cp -r USER-UEFEX/USER-UEFEX/ lammps-*/src
 cd lammps-*/src/
 make yes-user-uefex
 ```
@@ -43,7 +43,7 @@ make mpi
 ```
 
 ## Usage
-You can find several example files in `USER-UEFEX-master/examples`.
+You can find several example files in `USER-UEFEX/examples`.
 ```
 mpirun ./lmp_mpi < in.example
 ```
