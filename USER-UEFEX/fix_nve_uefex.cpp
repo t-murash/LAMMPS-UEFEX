@@ -124,27 +124,6 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
       }
       else
 	error->all(FLERR,"Illegal fix nve/uefex command");
-      /*
-      else if (strcmp(arg[iarg],"ext")==0) {
-	if (iarg+2 > narg) error->all(FLERR,"Illegal fix nve/uefex command");
-	if (strcmp(arg[iarg+1],"x")==0)
-	  ext_flags[1] = ext_flags[2] =  false;
-	else if (strcmp(arg[iarg+1],"y")==0)
-	  ext_flags[0] = ext_flags[2] =  false;
-	else if (strcmp(arg[iarg+1],"z")==0)
-	  ext_flags[0] = ext_flags[1] =  false;
-	else if (strcmp(arg[iarg+1],"xy")==0)
-	  ext_flags[2] = false;
-	else if (strcmp(arg[iarg+1],"xz")==0)
-	  ext_flags[1] = false;
-	else if (strcmp(arg[iarg+1],"yz")==0)
-	  ext_flags[0] = false;
-	else if (strcmp(arg[iarg+1],"xyz")!=0)
-	  error->all(FLERR,"Illegal fix nve/uefex command");
-
-	iarg += 2;
-      }
-      */
 
     }
   if (!erate_flag)
@@ -228,13 +207,7 @@ FixNVEUefex::~FixNVEUefex()
   modify->delete_compute(id_press);
   delete [] id_press;
 
-  /*
-  if (pcomputeflag && !pstat_flag)
-    {
-      modify->delete_compute(id_press);
-      delete [] id_press;
-    }
-  */
+
 }
 
 /* ----------------------------------------------------------------------
@@ -242,11 +215,9 @@ FixNVEUefex::~FixNVEUefex()
  * ---------------------------------------------------------------------- */
 int FixNVEUefex::setmask()
 {
-  //int mask = FixNH::setmask();
   int mask = 0;
   mask |= INITIAL_INTEGRATE;
   mask |= FINAL_INTEGRATE;
-  //mask |= THERMO_ENERGY;
   mask |= INITIAL_INTEGRATE_RESPA;
   mask |= FINAL_INTEGRATE_RESPA;
   if (pre_exchange_flag) mask |= PRE_EXCHANGE;
@@ -255,8 +226,7 @@ int FixNVEUefex::setmask()
 }
 
 /* ----------------------------------------------------------------------
- * Run FixNH::init() and do more error checking. Set the pressure 
- * pointer in the case that the nvt version is used
+ * Error checking. Set the temperature & pressure pointers 
  * ---------------------------------------------------------------------- */
 void FixNVEUefex::init()
 {
@@ -322,19 +292,6 @@ void FixNVEUefex::init()
 	  error->all(FLERR,"Can't use another fix which changes box shape with fix nve/uefex");
     }
 
-
-  // this will make the pressure compute for nvt
-  /*
-  if (!pstat_flag)
-    if (pcomputeflag)
-      {
-	int icomp = modify->find_compute(id_press);
-	if (icomp<0)
-	  error->all(FLERR,"Pressure ID for fix nve/uefex doesn't exist");
-	pressure = modify->compute[icomp];
-
-      }
-  */
 
   
   if (strcmp(pressure->style,"pressure/uefex") != 0)
@@ -783,7 +740,7 @@ void FixNVEUefex::inv_rotate_f(double r[3][3])
 
 /* ----------------------------------------------------------------------
    pack entire state of Fix into one write
-------------------------------------------------------------------------- */
+   ------------------------------------------------------------------------- */
 
 void FixNVEUefex::write_restart(FILE *fp)
 {
@@ -815,7 +772,7 @@ int FixNVEUefex::size_restart_global()
 
 /*
   ----------------------------------------------------------------------
-     pack restart data
+  pack restart data
   ----------------------------------------------------------------------
 */
 int FixNVEUefex::pack_restart_data(double *list)
@@ -828,7 +785,7 @@ int FixNVEUefex::pack_restart_data(double *list)
 
 /*
   ----------------------------------------------------------------------
-  read and set the strains after the default FixNH values
+  read and set the strains
   ----------------------------------------------------------------------
 */
 void FixNVEUefex::restart(char *buf)
@@ -1145,15 +1102,15 @@ void FixNVEUefex::rotate() // LAB to LAMMPS(UT)
 // Murashima 2018/12/28
 /*
   ----------------------------------------------------------------------
-   Transform the pressure tensor to the rotated coordinate system
-   [P]rot = Q.[P].Q^t
-   [P]    : LAMMPS(UT)
-   [P]rot : LAB
-   -------------------------------------------------------------------------
+  Transform the pressure tensor to the rotated coordinate system
+  [P]rot = Q.[P].Q^t
+  [P]    : LAMMPS(UT)
+  [P]rot : LAB
+  -------------------------------------------------------------------------
 */
 /*
-void FixNVEUefex::virial_rot(double *x, const double r[3][3])
-{
+  void FixNVEUefex::virial_rot(double *x, const double r[3][3])
+  {
 
   double t[3][3];
   // Original UEF
@@ -1169,9 +1126,9 @@ void FixNVEUefex::virial_rot(double *x, const double r[3][3])
   //
   for (int k = 0; k<3; ++k) 
   {
-    t[0][k] = x[0]*r[0][k] + x[5]*r[1][k] + x[4]*r[2][k];
-    t[1][k] = x[5]*r[0][k] + x[1]*r[1][k] + x[3]*r[2][k];
-    t[2][k] = x[4]*r[0][k] + x[3]*r[1][k] + x[2]*r[2][k];
+  t[0][k] = x[0]*r[0][k] + x[5]*r[1][k] + x[4]*r[2][k];
+  t[1][k] = x[5]*r[0][k] + x[1]*r[1][k] + x[3]*r[2][k];
+  t[2][k] = x[4]*r[0][k] + x[3]*r[1][k] + x[2]*r[2][k];
   }
   x[0] = r[0][0]*t[0][0] + r[1][0]*t[1][0] + r[2][0]*t[2][0];
   x[5] = r[0][0]*t[0][1] + r[1][0]*t[1][1] + r[2][0]*t[2][1];
@@ -1179,17 +1136,17 @@ void FixNVEUefex::virial_rot(double *x, const double r[3][3])
   x[1] = r[0][1]*t[0][1] + r[1][1]*t[1][1] + r[2][1]*t[2][1];
   x[3] = r[0][1]*t[0][2] + r[1][1]*t[1][2] + r[2][1]*t[2][2];
   x[2] = r[0][2]*t[0][2] + r[1][2]*t[1][2] + r[2][2]*t[2][2];
-}
+  }
 */
 
 // Murashima 2018/12/28
 /*
   ----------------------------------------------------------------------
-   Transform the symmetric tensor to the rotated coordinate system
-   [P] = Q^t.[P]rot.Q
-   [P]    : LAMMPS(UT)
-   [P]rot : LAB
-   -------------------------------------------------------------------------
+  Transform the symmetric tensor to the rotated coordinate system
+  [P] = Q^t.[P]rot.Q
+  [P]    : LAMMPS(UT)
+  [P]rot : LAB
+  -------------------------------------------------------------------------
 */
 
 void FixNVEUefex::inv_virial_rot(double *x, const double r[3][3])
@@ -1209,11 +1166,11 @@ void FixNVEUefex::inv_virial_rot(double *x, const double r[3][3])
   // This is consistent with domain.cpp
   //
   for (int k = 0; k<3; ++k) 
-  {
-    t[0][k] = x[0]*r[k][0] + x[5]*r[k][1] + x[4]*r[k][2];
-    t[1][k] = x[5]*r[k][0] + x[1]*r[k][1] + x[3]*r[k][2];
-    t[2][k] = x[4]*r[k][0] + x[3]*r[k][1] + x[2]*r[k][2];
-  }
+    {
+      t[0][k] = x[0]*r[k][0] + x[5]*r[k][1] + x[4]*r[k][2];
+      t[1][k] = x[5]*r[k][0] + x[1]*r[k][1] + x[3]*r[k][2];
+      t[2][k] = x[4]*r[k][0] + x[3]*r[k][1] + x[2]*r[k][2];
+    }
   x[0] = r[0][0]*t[0][0] + r[0][1]*t[1][0] + r[0][2]*t[2][0];
   x[5] = r[0][0]*t[0][1] + r[0][1]*t[1][1] + r[0][2]*t[2][1];
   x[4] = r[0][0]*t[0][2] + r[0][1]*t[1][2] + r[0][2]*t[2][2];
@@ -1225,7 +1182,7 @@ void FixNVEUefex::inv_virial_rot(double *x, const double r[3][3])
 
 
 // Murashima 2018/12/31
-  void FixNVEUefex::mat_mul6(const double a[6],const double b[6],double c[6])
+void FixNVEUefex::mat_mul6(const double a[6],const double b[6],double c[6])
 {
   // Multiply upper triangle matrix
   // [0 5 4]   [xx xy xz]
