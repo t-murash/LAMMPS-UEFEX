@@ -26,6 +26,7 @@ cd lammps-*/src/
 make yes-molecule
 make yes-user-uef
 ```
+(`yes-molecule` is necessary for examples.)
 
 Then, get this package and install.
 
