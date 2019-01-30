@@ -38,8 +38,8 @@ v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
 run 1000000
 
 dump d1 all custom/uefex 100 dump.lab-frame.lammpstrj id mol x y z
-dump_modify d4 sort id
-dump_modify d4 pbc yes
+dump_modify d1 sort id
+dump_modify d1 pbc yes
 
 run 10000
 
