@@ -14,7 +14,7 @@ Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and
 
 ## Installation
 This package is compiled within LAMMPS and depends on the original USER-UEF package.
-Download and install LAMMPS and the USER-UEF package according to the following site.
+Download and install LAMMPS and the USER-UEF package according to the following sites.
 * [LAMMPS](https://lammps.sandia.gov/)
 * [RutledgeGroupMIT/UEF](https://github.com/RutledgeGroupMIT/UEF)
 (The USER-UEF package has already been included in LAMMPS.)
