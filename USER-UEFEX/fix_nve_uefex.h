@@ -48,7 +48,7 @@ namespace LAMMPS_NS {
     virtual void post_run();
 
     // fix_nh
-    //int modify_param(int, char **);
+    int modify_param(int, char **);
     //void reset_target(double);
     //void reset_dt();
     //virtual void *extract(const char*, int &);

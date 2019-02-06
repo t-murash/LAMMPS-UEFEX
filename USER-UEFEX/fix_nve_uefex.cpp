@@ -133,12 +133,7 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
   if (!domain->triclinic)
     error->all(FLERR,"Simulation box must be triclinic for fix nve/uefex");
 
-  //check for conditions that impose a deviatoric stress
 
-  double erate_tmp[3];
-  erate_tmp[0]=erate[0];
-  erate_tmp[1]=erate[1];
-  erate_tmp[2]=-erate[0]-erate[1];
 
   // conditions that produce a deviatoric stress have already
   // been eliminated.
@@ -302,6 +297,36 @@ void FixNVEUefex::init()
     error->all(FLERR,"Using fix nve/uefex without a compute temp/uefex");
 
   
+}
+
+int FixNVEUefex::modify_param(int narg, char **arg){
+  if (strcmp(arg[0],"u")==0){
+    if (narg < 2) error->all(FLERR,"Illegal fix_modify command");
+    double rate=force->numeric(FLERR,arg[1]);
+    erate[0]=-0.5*rate;
+    erate[1]=-0.5*rate;
+    erate[2]=rate;
+    return 2;
+  }
+
+  if (strcmp(arg[0],"b")==0){
+    if (narg < 2) error->all(FLERR,"Illegal fix_modify command");
+    double rate=force->numeric(FLERR,arg[1]);
+    erate[0]=rate;
+    erate[1]=rate;
+    erate[2]=-2.0*rate;
+    return 2;
+  }
+
+  if (strcmp(arg[0],"p")==0){
+    if (narg < 2) error->all(FLERR,"Illegal fix_modify command");
+    double rate=force->numeric(FLERR,arg[1]);
+    erate[0]=-rate;
+    erate[1]=0.0;
+    erate[2]=rate;
+    return 2;
+  }
+  return 0;
 }
 
 
