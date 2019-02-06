@@ -20,10 +20,10 @@ thermo          1000
 timestep	0.01
 
 fix 1 all langevin 1.0 1.0 2.0 904297
-fix 2 all nve/uefex erate -0.0005 -0.0005 # uniaxial elongational flow 0.001
+fix 2 all nve/uefex erate 0.0 0.0
 compute mytemp all temp/uefex
-compute mypress all pressure/uefex mytemp
 fix_modify 1 temp mytemp
+compute mypress all pressure/uefex mytemp
 
 variable pxx equal c_mypress[1]
 variable pyy equal c_mypress[2]
@@ -35,15 +35,12 @@ variable pyz equal c_mypress[6]
 thermo_style custom step cpu c_mytemp &
 v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
 
+fix_modify 2 u 0.001
+# u:uniaxial (x,y:compressed, z:extended)
+# b:biaxial (x,y:extended, z:compressed)
+# p:planar (x:compressed, y:fixed, z:extended)
 
 run 1000000
-
-dump d1 all custom/uefex 100 dump.lab-frame.lammpstrj id mol x y z
-dump_modify d1 sort id
-dump_modify d1 pbc yes
-
-run 10000
-
 
 
 
