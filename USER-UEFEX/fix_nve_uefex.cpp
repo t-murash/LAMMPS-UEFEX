@@ -184,6 +184,9 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
   pcomputeflag = 1;
   nevery = 1;
 
+  integrate_flag=0;
+  integrate_step=0;
+  integrate_max_step=0;
 
 }
 
@@ -296,7 +299,7 @@ void FixNVEUefex::init()
   if (strcmp(temperature->style,"temp/uefex") != 0)
     error->all(FLERR,"Using fix nve/uefex without a compute temp/uefex");
 
-  
+
 }
 
 int FixNVEUefex::modify_param(int narg, char **arg){
@@ -326,6 +329,28 @@ int FixNVEUefex::modify_param(int narg, char **arg){
     erate[2]=rate;
     return 2;
   }
+
+  if (strcmp(arg[0],"ui")==0){
+    if (narg < 4) error->all(FLERR,"Illegal fix_modify command");
+    // "ui irate frate integrate_max_step"
+    double irate=force->numeric(FLERR,arg[1]);
+    double frate=force->numeric(FLERR,arg[2]);
+    integrate_max_step=force->numeric(FLERR,arg[3]);
+
+    delta_erate=(frate-irate)/(double)integrate_max_step;
+
+    //printf("%lf %lf %ld %.16f\n",irate,frate,integrate_max_step,delta_erate);
+    
+    integrate_flag=1;
+    integrate_step=0;
+    
+    erate[0]=-0.5*irate;
+    erate[1]=-0.5*irate;
+    erate[2]=irate;
+    return 4;
+  }
+
+  
   return 0;
 }
 
@@ -385,6 +410,21 @@ void FixNVEUefex::final_integrate()
   rotate_v(rot);
   rotate_f(rot);
   ((ComputeTempUefex*) temperature)->yes_rot();// LAMMPS(UT)
+
+  if(integrate_flag>0){
+    if(integrate_step>=integrate_max_step){
+      integrate_flag==0;
+      integrate_step=0;
+      integrate_max_step=0;
+    }
+  }
+
+  if (integrate_flag==1){
+    erate[0]-=0.5*delta_erate;
+    erate[1]-=0.5*delta_erate;
+    erate[2]+=delta_erate;
+    integrate_step+=1;
+  }
 }
 
 

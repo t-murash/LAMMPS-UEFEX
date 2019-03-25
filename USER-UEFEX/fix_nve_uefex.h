@@ -86,6 +86,8 @@ namespace LAMMPS_NS {
     int remapflag; // same as fix_deform.h
 
 
+
+
   
 
   protected:
@@ -137,7 +139,12 @@ namespace LAMMPS_NS {
     int pre_exchange_flag;           // set if pre_exchange needed for box flips
 
     double fixedpoint[3];            // location of dilation fixed-point
-  
+
+    //2019/03/26 for integration
+    int integrate_flag;
+    int integrate_step;
+    int integrate_max_step;
+    double delta_erate;
   
   };
 
