@@ -9,7 +9,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Feb 6, 2019<br>
+Last updated: Mar 26, 2019<br>
 Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 ## Installation
