@@ -303,6 +303,9 @@ void FixNVEUefex::init()
 }
 
 int FixNVEUefex::modify_param(int narg, char **arg){
+  integrate_flag==0;
+  integrate_step=0;
+  integrate_max_step=0;
   if (strcmp(arg[0],"u")==0){
     if (narg < 2) error->all(FLERR,"Illegal fix_modify command");
     double rate=force->numeric(FLERR,arg[1]);
@@ -336,11 +339,8 @@ int FixNVEUefex::modify_param(int narg, char **arg){
     double irate=force->numeric(FLERR,arg[1]);
     double frate=force->numeric(FLERR,arg[2]);
     integrate_max_step=force->numeric(FLERR,arg[3]);
-
     delta_erate=(frate-irate)/(double)integrate_max_step;
-
     //printf("%lf %lf %ld %.16f\n",irate,frate,integrate_max_step,delta_erate);
-    
     integrate_flag=1;
     integrate_step=0;
     
