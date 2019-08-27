@@ -899,7 +899,7 @@ void FixNVEUefex::post_run()
 {
   pre_exchange();
   domain->x2lamda(atom->nlocal);
-  set_h_rate();// Murashima 2019/01/02
+  //set_h_rate();// Murashima 2019/08/27 comment out
   domain->pbc();
   timer->stamp();
   comm->exchange();
