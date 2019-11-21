@@ -1,8 +1,10 @@
+variable rcut equal 2.0^(1.0/6.0)
 units		lj
+comm_modify cutoff 2.0
 atom_style	bond
 special_bonds   fene
 bond_style      fene
-pair_style	lj/cut 1.12246
+pair_style	lj/cut ${rcut}
 
 read_data	N100M100.data
 
@@ -12,7 +14,7 @@ neigh_modify	every 1 delay 1
 bond_coeff	1 30.0 1.5 1.0 1.0
 
 pair_modify	shift yes
-pair_coeff	1 1 1.0 1.0 1.12246
+pair_coeff	1 1 1.0 1.0 ${rcut}
 
 change_box	all triclinic
 
