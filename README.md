@@ -9,7 +9,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Mar 26, 2019<br>
+Last updated: Jul 03, 2020<br>
 Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 ## Installation
@@ -32,7 +32,7 @@ Then, get this package and install.
 
 ```
 git clone https://github.com/t-murash/USER-UEFEX.git
-cp -r USER-UEFEX/USER-UEFEX/ lammps-*/src
+cp -r USER-UEFEX/USER-UEFEX lammps-*/src/.
 cd lammps-*/src/
 make yes-user-uefex
 ```
