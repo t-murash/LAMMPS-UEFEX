@@ -51,7 +51,7 @@ make mpi
 ## Usage
 You can find several example files in `USER-UEFEX/examples`.
 ```
-mpirun ./lmp_mpi < in.example
+mpirun ./lmp_mpi -in in.example
 ```
 
 ## Citing the USER-UEFEX package
