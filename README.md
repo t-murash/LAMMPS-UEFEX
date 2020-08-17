@@ -7,6 +7,8 @@ The extensional package for the USER-UEF package in LAMMPS. This package is usef
 
 <img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/cubic-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
+<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/unwrap.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+
 
 
 Authored by:

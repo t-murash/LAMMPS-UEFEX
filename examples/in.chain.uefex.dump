@@ -34,7 +34,7 @@ run 1000000
 
 variable freq string 100
 
-dump d2 all custom ${freq} dump.lammps-frame.lammpstrj id mol type x y z vx vy vz fx fy fz
+dump d2 all custom ${freq} dump.lammps-frame.lammpstrj id mol type x y z vx vy vz fx fy fz ix iy iz
 dump_modify d2 sort id
 dump_modify d2 pbc yes
 fix rot all ave/time ${freq} 1 ${freq}  c_rmatrix[*] file rotation.txt
