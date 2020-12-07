@@ -111,15 +111,15 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
     {
       if (strcmp(arg[iarg],"erate")==0) {
 	if (iarg+3 > narg) error->all(FLERR,"Illegal fix nve/uefex command");
-	erate[0] = utils::numeric(FLERR,arg[iarg+1],false,lmp);
-	erate[1] = utils::numeric(FLERR,arg[iarg+2],false,lmp);
+	erate[0] = force->numeric(FLERR,arg[iarg+1]);
+	erate[1] = force->numeric(FLERR,arg[iarg+2]);
 	erate_flag = true;
 	iarg += 3;
       }
       else if (strcmp(arg[iarg],"strain")==0) {
 	if (iarg+3 > narg) error->all(FLERR,"Illegal fix nve/uefex command");
-	strain[0] = utils::numeric(FLERR,arg[iarg+1],false,lmp);
-	strain[1] = utils::numeric(FLERR,arg[iarg+2],false,lmp);
+	strain[0] = force->numeric(FLERR,arg[iarg+1]);
+	strain[1] = force->numeric(FLERR,arg[iarg+2]);
 	iarg += 3;
       }
       else
@@ -144,7 +144,7 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
   irregular = new Irregular(lmp);
 
   // flag that I change the box here (in case of nvt)
-  box_change |= BOX_CHANGE_SHAPE;
+  box_change_shape = 1;
 
   // initialize the UEFBox class which computes the box at each step
   uefbox = new UEF_utils::UEFBox();
@@ -286,7 +286,7 @@ void FixNVEUefex::init()
   for (int i=0; i < modify->nfix; i++)
     {
       if (strcmp(modify->fix[i]->id,id) != 0)
-	if ((modify->fix[i]->box_change & BOX_CHANGE_SHAPE) != 0)
+	if (modify->fix[i]->box_change_shape != 0)
 	  error->all(FLERR,"Can't use another fix which changes box shape with fix nve/uefex");
     }
 
@@ -308,7 +308,7 @@ int FixNVEUefex::modify_param(int narg, char **arg){
   integrate_max_step=0;
   if (strcmp(arg[0],"u")==0){
     if (narg < 2) error->all(FLERR,"Illegal fix_modify command");
-    double rate=utils::numeric(FLERR,arg[1],false,lmp);
+    double rate=force->numeric(FLERR,arg[1]);
     erate[0]=-0.5*rate;
     erate[1]=-0.5*rate;
     erate[2]=rate;
@@ -317,7 +317,7 @@ int FixNVEUefex::modify_param(int narg, char **arg){
 
   if (strcmp(arg[0],"b")==0){
     if (narg < 2) error->all(FLERR,"Illegal fix_modify command");
-    double rate=utils::numeric(FLERR,arg[1],false,lmp);
+    double rate=force->numeric(FLERR,arg[1]);
     erate[0]=rate;
     erate[1]=rate;
     erate[2]=-2.0*rate;
@@ -326,7 +326,7 @@ int FixNVEUefex::modify_param(int narg, char **arg){
 
   if (strcmp(arg[0],"p")==0){
     if (narg < 2) error->all(FLERR,"Illegal fix_modify command");
-    double rate=utils::numeric(FLERR,arg[1],false,lmp);
+    double rate=force->numeric(FLERR,arg[1]);
     erate[0]=-rate;
     erate[1]=0.0;
     erate[2]=rate;
@@ -336,9 +336,9 @@ int FixNVEUefex::modify_param(int narg, char **arg){
   if (strcmp(arg[0],"ui")==0){
     if (narg < 4) error->all(FLERR,"Illegal fix_modify command");
     // "ui irate frate integrate_max_step"
-    double irate=utils::numeric(FLERR,arg[1],false,lmp);
-    double frate=utils::numeric(FLERR,arg[2],false,lmp);
-    integrate_max_step=utils::numeric(FLERR,arg[3],false,lmp);
+    double irate=force->numeric(FLERR,arg[1]);
+    double frate=force->numeric(FLERR,arg[2]);
+    integrate_max_step=force->numeric(FLERR,arg[3]);
     delta_erate=(frate-irate)/(double)integrate_max_step;
     //printf("%lf %lf %ld %.16f\n",irate,frate,integrate_max_step,delta_erate);
     integrate_flag=1;

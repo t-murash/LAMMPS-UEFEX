@@ -106,8 +106,7 @@ class DumpCustomUefex : public Dump {
   void pack(tagint *);
   virtual int convert_string(int, double *);
   virtual void write_data(int, double *);
-  //bigint memory_usage();
-  double memory_usage();
+  bigint memory_usage();
 
   int parse_fields(int, char **);
   int add_compute(char *);
