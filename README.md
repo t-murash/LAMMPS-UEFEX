@@ -1,15 +1,7 @@
 # USER-UEFEX
 The extensional package for the USER-UEF package in LAMMPS. This package is useful for Langevin dynamics and dissipative particle dynamics to apply uniform extensional flows.
 
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/movie.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
-
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/original-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
-
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/cubic-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
-
 <img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/unwrap.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
-
-
 
 Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
@@ -17,6 +9,15 @@ Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
 Last updated: Dec 07, 2020<br>
 Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
+
+
+<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/movie.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+
+<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/original-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+
+<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/cubic-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+
+
 
 ## Installation
 This package is compiled within LAMMPS and depends on the original USER-UEF package.
