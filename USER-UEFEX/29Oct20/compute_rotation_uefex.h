@@ -37,6 +37,7 @@ class ComputeRotationUefex : public Compute {
  protected:
   int ifix_uef;
   double rot[3][3];
+  int uef_flag;// 0:nve/uefex, 1:nvt/uef, 2:npt/uef
 };
 
 }
@@ -50,7 +51,7 @@ class ComputeRotationUefex : public Compute {
    This class inherits most of the warnings from ComputePressure. The
    only addition is:
 
-   E: Can't use compute rotation/uefex without defining a fix nve/uefex
+   E: Can't use compute rotation/uefex without defining fix nve/uefex or fix nvt/uef or fix npt/uef
 
    Self-explanatory.  
 

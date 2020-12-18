@@ -20,6 +20,8 @@
 #include <cstdlib>
 #include "compute_rotation_uefex.h"
 #include "fix_nve_uefex.h"
+#include "fix_npt_uef.h"
+#include "fix_nvt_uef.h"
 #include "update.h"
 #include "domain.h"
 #include "modify.h"
@@ -66,11 +68,21 @@ void ComputeRotationUefex::init()
   int i=0;
   for (i=0; i<modify->nfix; i++)
     {
-      if (strcmp(modify->fix[i]->style,"nve/uefex")==0)
+      if (strcmp(modify->fix[i]->style,"nve/uefex")==0){
+	uef_flag=0;
 	break;
+      }
+      if (strcmp(modify->fix[i]->style,"nvt/uef")==0){
+	uef_flag=1;
+	break;
+      }
+      if (strcmp(modify->fix[i]->style,"npt/uef")==0){
+	uef_flag=2;
+	break;
+      }
     }
   if (i==modify->nfix)
-    error->all(FLERR,"Can't use compute rotation/uefex without defining a fix nve/uefex");
+    error->all(FLERR,"Can't use compute rotation/uefex without defining fix nve/uefex or fix nvt/uef or fix npt/uef");
   
   ifix_uef=i;
 }
@@ -85,7 +97,14 @@ void ComputeRotationUefex::compute_vector()
   //  if(update->vflag_global != invoked_vector)
   //    error->all(FLERR,"Rotation was not tallied on needed timestep");
 
-  ((FixNVEUefex*) modify->fix[ifix_uef])->get_rot(rot);
+  if(uef_flag==0){
+    ((FixNVEUefex*) modify->fix[ifix_uef])->get_rot(rot);
+  }else if(uef_flag==1){
+    ((FixNVTUef*) modify->fix[ifix_uef])->get_rot(rot);
+  }else if(uef_flag==2){
+    ((FixNPTUef*) modify->fix[ifix_uef])->get_rot(rot);
+  }
+  
   vector[0]=rot[0][0];
   vector[1]=rot[0][1];
   vector[2]=rot[0][2];
