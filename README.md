@@ -1,5 +1,5 @@
-# USER-UEFEX
-The extensional package for the USER-UEF package in LAMMPS. This package is useful for Langevin dynamics and dissipative particle dynamics to apply uniform extensional flows.
+# UEFEX
+The extensional package for the UEF package in LAMMPS. This package is useful for Langevin dynamics and dissipative particle dynamics to apply uniform extensional flows.
 
 <img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/unwrap.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Dec 07, 2020<br>
+Last updated: Oct 20, 2021<br>
 Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 
@@ -20,11 +20,11 @@ Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and
 
 
 ## Installation
-This package is compiled within LAMMPS and depends on the original USER-UEF package.
-Download and install LAMMPS and the USER-UEF package according to the following sites.
+This package is compiled within LAMMPS and depends on the original UEF package.
+Download and install LAMMPS and the UEF package according to the following sites.
 * [LAMMPS](https://lammps.sandia.gov/)
 * [RutledgeGroupMIT/UEF](https://github.com/RutledgeGroupMIT/UEF)
-(The USER-UEF package has already been included in LAMMPS.)
+(The UEF package has already been included in LAMMPS. You do not need to get UEF package from this site.)
 
 ```
 wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
@@ -39,39 +39,45 @@ Then, get this package and install.
 
 ```
 git clone https://github.com/t-murash/USER-UEFEX.git
-cp -r USER-UEFEX/USER-UEFEX lammps-*/src/.
+cp -r USER-UEFEX/UEFEX lammps-*/src/.
 cd lammps-*/src/
-make yes-user-uefex
+make yes-uefex
 ```
 
 Finally, compile LAMMPS.
 
 ```
 cd lammps-*/src/
-make mpi
+make mpi mode=static
 ```
 
 ## For cmake users
 
 ```
-cp -r USER-UEFEX/USER-UEFEX lammps-*/src/.
-mv lammps-*/src/USER-UEFEX/domain.cpp lammps-*/src/.
+wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
+tar xvf lammps-stable.tar.gz
+git clone https://github.com/t-murash/USER-UEFEX.git
+cp -r USER-UEFEX/UEFEX lammps-*/src/.
+mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
 ```
 
-Edit the following files to include `USER-UEFEX`.
+Edit the following files to include `UEFEX`.
 
 ```
 lammps-*/cmake/CMakeLists.txt
 lammps-*/cmake/presets/all_off.cmake
 lammps-*/cmake/presets/all_on.cmake
 ```
-Then, build using `cmake` with `-D PKG_USER-UEFEX=yes`
+The easiest way is, find `UEF` in the above files and place `UEFEX` below `UEF`.
+
+
+Then, build using `cmake` with `-D PKG_UEFEX=yes`
 
 ```
 cd lammps-*
 mkdir build
 cd build
-cmake -D BUILD_MPI=yes　-D PKG_MOLECULE=yes -D PKG_USER-UEF=yes -D PKG_USER-UEFEX=yes
+cmake ../cmake -D BUILD_MPI=yes　-D PKG_MOLECULE=yes -D PKG_UEF=yes -D PKG_UEFEX=yes
 make
 ```
 
@@ -86,7 +92,7 @@ mpirun ./lmp -in in.example
 ```
 
 
-## Citing the USER-UEFEX package
+## Citing the UEFEX package
 
 Users of this package are encouraged to cite the following articles in scientific publications:
 
