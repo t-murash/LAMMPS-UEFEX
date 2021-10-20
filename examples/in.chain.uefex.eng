@@ -1,0 +1,47 @@
+variable rcut equal 2.0^(1.0/6.0)
+units		lj
+comm_modify cutoff 2.0
+atom_style	bond
+special_bonds   fene
+bond_style      fene
+pair_style	lj/cut ${rcut}
+
+read_data	N100M100.data
+
+neighbor	0.4 bin
+neigh_modify	every 1 delay 1
+
+bond_coeff	1 30.0 1.5 1.0 1.0
+
+pair_modify	shift yes
+pair_coeff	1 1 1.0 1.0 ${rcut}
+
+change_box	all triclinic
+
+thermo          1000
+timestep	0.01
+
+fix 1 all langevin 1.0 1.0 2.0 904297
+fix 2 all nve/uefex engrate -0.0005 -0.0005 # uniaxial elongational flow 0.001
+compute mytemp all temp/uefex
+compute mypress all pressure/uefex mytemp
+fix_modify 1 temp mytemp
+
+variable pxx equal c_mypress[1]
+variable pyy equal c_mypress[2]
+variable pzz equal c_mypress[3]
+variable pxy equal c_mypress[4]
+variable pxz equal c_mypress[5]
+variable pyz equal c_mypress[6]
+
+thermo_style custom step cpu c_mytemp &
+v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
+
+run 1000000
+
+
+
+
+
+
+

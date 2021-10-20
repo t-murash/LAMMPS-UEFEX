@@ -51,11 +51,40 @@ cd lammps-*/src/
 make mpi
 ```
 
+## For cmake users
+
+```
+cp -r USER-UEFEX/USER-UEFEX lammps-*/src/.
+mv lammps-*/src/USER-UEFEX/domain.cpp lammps-*/src/.
+```
+
+Edit the following files to include `USER-UEFEX`.
+
+```
+lammps-*/cmake/CMakeLists.txt
+lammps-*/cmake/presets/all_off.cmake
+lammps-*/cmake/presets/all_on.cmake
+```
+Then, build using `cmake` with `-D PKG_USER-UEFEX=yes`
+
+```
+cd lammps-*
+mkdir build
+cd build
+cmake -D BUILD_MPI=yes　-D PKG_MOLECULE=yes -D PKG_USER-UEF=yes -D PKG_USER-UEFEX=yes
+make
+```
+
 ## Usage
 You can find several example files in `USER-UEFEX/examples`.
 ```
 mpirun ./lmp_mpi -in in.example
 ```
+or
+```
+mpirun ./lmp -in in.example
+```
+
 
 ## Citing the USER-UEFEX package
 

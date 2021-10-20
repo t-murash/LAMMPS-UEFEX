@@ -98,12 +98,20 @@ namespace LAMMPS_NS {
     //char **arg_kludge(int&, char**, int&);
     //int  narg_kludge(int&, char**); // add by Murashima 2017/11/08
 
-    double strain[2],erate[2]; // strain/strain rate : [e_x, e_y]
+    double strain[2],erate[2];
+    // strain/strain rate : [e_x, e_y]
     // always assume traceless e_z = -e_x-e_y
 
-    int rem;                   //this is for the narg kluge
+    double eng_strain, eng_rate;
+    bool   eng_flag;
+    //for constant engineering strain rate
+    // 2021/10/20 by TM
 
-    UEF_utils::UEFBox *uefbox;            // interface for the special simulation box
+    int rem;
+    //this is for the narg kluge
+
+    UEF_utils::UEFBox *uefbox;
+    // interface for the special simulation box
 
     double rot[3][3];          // rotation matrix
     bool ext_flags[3];         // flags for external "free surfaces"

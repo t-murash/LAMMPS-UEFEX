@@ -106,6 +106,7 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
 
   // parse remaining input
   bool erate_flag = false;
+  eng_flag = false; // 2021/10/20 by TM
   int iarg = 3;
   while (iarg <narg)
     {
@@ -114,7 +115,18 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
 	erate[0] = utils::numeric(FLERR,arg[iarg+1],false,lmp);
 	erate[1] = utils::numeric(FLERR,arg[iarg+2],false,lmp);
 	erate_flag = true;
+	eng_flag = false;
 	iarg += 3;
+      }else if (strcmp(arg[iarg],"engrate")==0) {
+	if (iarg+2 > narg) error->all(FLERR,"Illegal fix nve/uefex command(test)");
+	eng_rate = utils::numeric(FLERR,arg[iarg+1],false,lmp);
+	erate_flag = true;
+	eng_flag = true;
+	iarg += 2;
+	eng_strain=0; // zero clear
+	double eng_rate_z=eng_rate/(1.0+eng_strain);
+	erate[0]=-0.5*eng_rate_z;
+	erate[1]=-0.5*eng_rate_z;
       }
       else if (strcmp(arg[iarg],"strain")==0) {
 	if (iarg+3 > narg) error->all(FLERR,"Illegal fix nve/uefex command");
@@ -126,6 +138,7 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
 	error->all(FLERR,"Illegal fix nve/uefex command");
 
     }
+  
   if (!erate_flag)
     error->all(FLERR,"Keyword erate must be set for fix nve/uefex command");
 
@@ -137,7 +150,7 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
 
   // conditions that produce a deviatoric stress have already
   // been eliminated.
-  //deviatoric_flag=0;
+  // deviatoric_flag=0;
 
   // need pre_exchange and irregular migration
   pre_exchange_flag = 1;
@@ -424,6 +437,14 @@ void FixNVEUefex::final_integrate()
     erate[1]-=0.5*delta_erate;
     erate[2]+=delta_erate;
     integrate_step+=1;
+  }
+
+  // 2021/10/20 by TM
+  if(eng_flag){
+    eng_strain += eng_rate*dtv;
+    double eng_rate_z = eng_rate/(1.0+eng_strain);
+    erate[0] = -0.5*eng_rate_z;
+    erate[1] = -0.5*eng_rate_z;
   }
 }
 
@@ -832,7 +853,9 @@ void FixNVEUefex::write_restart(FILE *fp)
 */
 int FixNVEUefex::size_restart_global()
 {
-  return 2;
+  return 3;
+  // strain[0],strain[1],eng_strain
+  // 2021/10/20 by TM
 }
 
 /*
@@ -845,6 +868,7 @@ int FixNVEUefex::pack_restart_data(double *list)
   int n = 0;
   list[n++] = strain[0];
   list[n++] = strain[1];
+  list[n++] = eng_strain; // 2021/10/20 by TM
   return n;
 }
 
@@ -857,9 +881,35 @@ void FixNVEUefex::restart(char *buf)
 {
   int n = size_restart_global();
   double *list = (double *) buf;
-  strain[0] = list[n-2];
-  strain[1] = list[n-1];
+  strain[0] = list[n-3];// 2021/10/20 by TM
+  strain[1] = list[n-2];// 2021/10/20 by TM
+  eng_strain = list[n-1];//2021/10/20 by TM
+
+  //2021/10/20 by TM
+  if(eng_flag){
+    double eng_rate_z = eng_rate/(1.0+eng_strain);
+    erate[0] = -0.5*eng_rate_z;
+    erate[1] = -0.5*eng_rate_z;
+  }
+
+  
   uefbox->set_strain(strain[0],strain[1]);
+
+  uefbox->get_rot(rot); // 2021/10/20 by TM
+
+  if (comm->me==0){
+    utils::logmesg(lmp,fmt::format("  strain x = {} \n",strain[0]));
+    utils::logmesg(lmp,fmt::format("  strain y = {} \n",strain[1]));
+    utils::logmesg(lmp,fmt::format("  strain z = {} \n",-strain[0]-strain[1]));
+    if(eng_flag){
+      utils::logmesg(lmp,fmt::format("  eng_strain z (const eng) = {} \n",eng_strain));
+    }else{
+      utils::logmesg(lmp,fmt::format("  eng_strain z = {} \n",exp(-strain[0]-strain[1])-1.0));
+    }
+    utils::logmesg(lmp,fmt::format("   ex = {} {} {}\n",rot[0][0],rot[1][0],rot[2][0]));
+    utils::logmesg(lmp,fmt::format("   ey = {} {} {}\n",rot[0][1],rot[1][1],rot[2][1]));
+    utils::logmesg(lmp,fmt::format("   ez = {} {} {}\n",rot[0][2],rot[1][2],rot[2][2]));
+  }
 }
 
 /*
@@ -908,6 +958,21 @@ void FixNVEUefex::post_run()
   timer->stamp(Timer::COMM);
   neighbor->build(1);
   timer->stamp(Timer::NEIGH);
+
+  uefbox->get_rot(rot); // 2021/09/21 by TM                                                                                               
+  if (comm->me==0){
+    utils::logmesg(lmp,fmt::format("  strain x = {} \n",strain[0]));
+    utils::logmesg(lmp,fmt::format("  strain y = {} \n",strain[1]));
+    utils::logmesg(lmp,fmt::format("  strain z = {} \n",-strain[0]-strain[1]));
+    if(eng_flag){
+      utils::logmesg(lmp,fmt::format("  eng_strain z = {} (const eng)\n",eng_strain));
+    }else{
+      utils::logmesg(lmp,fmt::format("  eng_strain z = {} \n",exp(-strain[0]-strain[1])-1.0));
+    }
+    utils::logmesg(lmp,fmt::format("  ex = {} {} {}\n",rot[0][0],rot[1][0],rot[2][0]));
+    utils::logmesg(lmp,fmt::format("  ey = {} {} {}\n",rot[0][1],rot[1][1],rot[2][1]));
+    utils::logmesg(lmp,fmt::format("  ez = {} {} {}\n",rot[0][2],rot[1][2],rot[2][2]));
+  }
 }
 
 /*
