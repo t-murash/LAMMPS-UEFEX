@@ -31,7 +31,7 @@ wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
 tar xvf lammps-stable.tar.gz
 cd lammps-*/src/
 make yes-molecule
-make yes-user-uef
+make yes-uef
 ```
 (`yes-molecule` is necessary for examples.)
 
