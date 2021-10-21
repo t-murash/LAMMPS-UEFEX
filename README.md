@@ -81,6 +81,13 @@ cmake ../cmake -D BUILD_MPI=yes　-D PKG_MOLECULE=yes -D PKG_UEF=yes -D PKG_UEFE
 make
 ```
 
+## For old version users (29Oct20, 3Mar20)
+You can find `29Oct20` and `3Mar20` directories in `lammps-*/src/UEFEX`.
+`29Oct20` contains source files compatible with `29Oct20` of LAMMPS.
+The source files in `3Mar20` are compatible with `3Mar20` of LAMMPS and the more previous versions of LAMMPS.
+Copy the source files to the above directory (`UEFEX`) according to your versions.
+Then, make or cmake in the same way as described above.
+
 ## Usage
 You can find several example files in `USER-UEFEX/examples`.
 ```
