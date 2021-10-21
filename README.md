@@ -27,7 +27,7 @@ Download and install LAMMPS and the UEF package according to the following sites
 (The UEF package has already been included in LAMMPS. You do not need to get the UEF package from this site.)
 
 ```
-wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
+wget https://download.lammps.org/tars/lammps-stable.tar.gz
 tar xvf lammps-stable.tar.gz
 cd lammps-*/src/
 make yes-molecule
@@ -54,7 +54,7 @@ make mpi mode=static
 ## For cmake users
 
 ```
-wget http://lammps.sandia.gov/tars/lammps-stable.tar.gz
+wget https://download.lammps.org/tars/lammps-stable.tar.gz
 tar xvf lammps-stable.tar.gz
 git clone https://github.com/t-murash/USER-UEFEX.git
 cp -r USER-UEFEX/UEFEX lammps-*/src/.
