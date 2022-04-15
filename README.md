@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Apr 15, 2022<br>
+Last updated: Apr 16, 2022<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 
