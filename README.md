@@ -71,13 +71,13 @@ lammps-*/cmake/presets/all_on.cmake
 The easiest way is, find `UEF` in the above files and place `UEFEX` below `UEF`.
 
 
-Then, build using `cmake` with `-D PKG_UEFEX=yes`
+Then, build using `cmake` with `-DPKG_UEFEX=yes`
 
 ```
 cd lammps-*
 mkdir build
 cd build
-cmake ../cmake -D BUILD_MPI=yes　-D PKG_MOLECULE=yes -D PKG_UEF=yes -D PKG_UEFEX=yes
+cmake ../cmake -DBUILD_MPI=yes -DPKG_MOLECULE=yes -DPKG_UEF=yes -DPKG_UEFEX=yes
 make
 ```
 
