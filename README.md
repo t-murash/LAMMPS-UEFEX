@@ -1,21 +1,21 @@
 # UEFEX
 The extensional package for the UEF package in LAMMPS. This package is useful for Langevin dynamics and dissipative particle dynamics to apply uniform extensional flows.
 
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/unwrap.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/unwrap.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
 Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
 Last updated: Apr 15, 2022<br>
-Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
+Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/movie.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/movie.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/original-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/original-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
-<img src="https://github.com/t-murash/USER-UEFEX/blob/master/img/cubic-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/cubic-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
 
 
@@ -38,8 +38,8 @@ make yes-uef
 Then, get this package and install.
 
 ```
-git clone https://github.com/t-murash/USER-UEFEX.git
-cp -r USER-UEFEX/UEFEX lammps-*/src/.
+git clone https://github.com/t-murash/LAMMPS-UEFEX.git
+cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
 cd lammps-*/src/
 make yes-uefex
 ```
@@ -56,8 +56,8 @@ make mpi mode=static
 ```
 wget https://download.lammps.org/tars/lammps-stable.tar.gz
 tar xvf lammps-stable.tar.gz
-git clone https://github.com/t-murash/USER-UEFEX.git
-cp -r USER-UEFEX/UEFEX lammps-*/src/.
+git clone https://github.com/t-murash/LAMMPS-UEFEX.git
+cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
 mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
 ```
 
@@ -89,7 +89,7 @@ Copy the source files to the above directory (`UEFEX`) according to your version
 Then, make or cmake in the same way as described above.
 
 ## Usage
-You can find several example files in `USER-UEFEX/examples`.
+You can find several example files in `LAMMPS-UEFEX/examples`.
 ```
 mpirun ./lmp_mpi -in in.example
 ```
