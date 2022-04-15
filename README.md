@@ -22,7 +22,7 @@ Support provided via [issues](https://github.com/t-murash/USER-UEFEX/issues) and
 ## Installation
 This package is compiled within LAMMPS and depends on the original UEF package.
 Download and install LAMMPS and the UEF package according to the following sites.
-* [LAMMPS](https://lammps.sandia.gov/)
+* [LAMMPS](https://lammps.org/)
 * [RutledgeGroupMIT/UEF](https://github.com/RutledgeGroupMIT/UEF)
 (The UEF package has already been included in LAMMPS. You do not need to get the UEF package from this site.)
 
