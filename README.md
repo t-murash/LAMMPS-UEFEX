@@ -25,7 +25,8 @@ This package is compiled within LAMMPS and depends on the original UEF package.
 Download and install LAMMPS and the UEF package according to the following sites.
 * [LAMMPS](https://lammps.org/)
 * [RutledgeGroupMIT/UEF](https://github.com/RutledgeGroupMIT/UEF)
-**(Note)**(The UEF package has already been included in LAMMPS. You do not need to get the UEF package from this site.)
+
+**(Note)** The UEF package has already been included in LAMMPS. You do not need to get the UEF package from this site.
 
 ```
 wget https://download.lammps.org/tars/lammps-stable.tar.gz
