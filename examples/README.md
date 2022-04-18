@@ -30,5 +30,14 @@ You will get data files, png files, and a gif file (movie.gif) as same as the to
 <img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/figure.001.png" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
 `in.uefex.data` summarizes how to use the UEFEX package.
-Particle positions and the unit cell in a LAMMPS data file are not consistent with the elongational directions.
+```
+fix 2 all nve/uefex erate 0.0 0.0          # nve with UEF deformation
+compute mytemp all temp/uefex              # compute temperature under elongational flow
+compute mypress all pressure/uefex mytemp  # compute pressure under elongational flow
+fix_modify 1 temp mytemp                   # velocity correction under elongational flow
+fix_modify 2 u 0.001                       # set uniaxial elongational rate as 0.001
+compute rmatrix all rotation/uefex         # compute rotation matrix
+```
+
+Particle positions and the unit cell saved in a LAMMPS data file are not consistent with the elongational directions under UEF.
 To correct this, a rotation matrix is multiplied to the particle positions and the unit cell in `anim.py`.
