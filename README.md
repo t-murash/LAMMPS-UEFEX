@@ -10,12 +10,13 @@ Initial commit: Feb 22, 2018<br>
 Last updated: Apr 16, 2022<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
-
+<!--
 <img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/movie.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
 <img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/original-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
 <img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/cubic-view.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+-->
 
 
 
