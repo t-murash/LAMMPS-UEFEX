@@ -31,11 +31,11 @@ You will get data files, png files, and a gif file (movie.gif) as shown in the t
 
 `in.uefex.data` summarizes how to use the UEFEX package.
 ```
-fix 2 all nve/uefex erate 0.0 0.0          # nve with UEF deformation
+fix 2 all nve/uefex erate 0.0 0.0          # set nve with UEF deformation (elongation rate is 0)
 compute mytemp all temp/uefex              # compute temperature under elongational flow
-compute mypress all pressure/uefex mytemp  # compute pressure under elongational flow
+compute mypress all pressure/uefex mytemp  # compute pressure under elongational flow (pxx,pyy,pzz,pxy,pxz,pyz order)
 fix_modify 1 temp mytemp                   # velocity correction under elongational flow
-fix_modify 2 u 0.001                       # set uniaxial elongational rate as 0.001
+fix_modify 2 u 0.001                       # set uniaxial elongational rate as 0.001 (u:uniaxial, b:biaxial, p:planar)
 compute rmatrix all rotation/uefex         # compute rotation matrix
 ```
 
