@@ -23,7 +23,7 @@ mpirun ./lmp -in in.uefex.data
 bash anim.sh
 ```
 
-You will get data files, png files, and a gif file (movie.gif) as same as the top page.
+You will get data files, png files, and a gif file (movie.gif) as shown in the top page.
 
 <img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/movie-2022-04-18.gif" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
