@@ -3,15 +3,17 @@
 ## Contents
 - N100M100.data : Configuration data of Kremer-Grest model with N=100 and M=100
 - README.md : This document
-- anim.py : Python script for processing a PNG file
-- anim.sh : Bash script for processing a gif file
-- in.uefex : Example for UEFEX(nve/uefex, temp/uefex, pressure/uefex)
-- in.uefex.data : Input file to produce the above gif file
-- in.uefex.dump : Example for rotation/uefex
-- in.uefex.eng : Example for engrate option
-- in.uefex.stress.atom : Example for stress/atom/uefex
-- in.uefex.uni : Example for fix_modify u option
+- anim.py                : Python script for processing a snapshot of polymers (PNG)
+- anim.sh                : Bash script for processing an animation of polymers (gif)
+- in.uefex               : Example for UEFEX(nve/uefex, temp/uefex, pressure/uefex)
+- in.uefex.data          : Input file to produce the above gif file
+- in.uefex.dump          : Example for rotation/uefex
+- in.uefex.eng           : Example for engrate option
+- in.uefex.stress.atom   : Example for stress/atom/uefex
+- in.uefex.uni           : Example for fix_modify u option
 - in.uefex.uni.integrate : Example for fix_modify ui option
+- smooth.py              : Python script for smoothing data
+- visc.plt               : gnuplot script for processing a graph of viscosity growth 
 
 ## Elongational viscosity
 First, install `numpy`, `scipy`, `pandas`, and `gnuplot`.
