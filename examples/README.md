@@ -18,35 +18,7 @@
 | smooth.py              | Python script for smoothing data |
 | visc.plt               | Gnuplot script for processing a graph of viscosity growth |
 
-## Elongational viscosity
-First, install `numpy`, `scipy`, `pandas`, and `gnuplot`.
 
-Then, run the following commands.
-```
-mpirun ./lmp -in in.uefex
-python smooth.py
-gnuplot visc.plt
-```
-You will get the following image (PNG file).
-
-<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/visc.png" title="Elongational viscosity" width=300/>
-
-`in.uefex` produces `press.txt`. The first 4 lines of this text file will start as follows.
-```
-# Time-averaged data for fix a1
-# TimeStep v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
-0 4.81638 4.70122 5.01902 0.0253983 0.0392435 0.0244829
-100 4.63578 4.60468 4.80104 0.120378 -0.029315 -0.0383236
-```
-The first column is "Time Step". To obtain "Time", you need to multiply ![dt](https://latex.codecogs.com/gif.latex?%5CDelta%20t%20%28%3D0.01%29) to this column values.
-The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" ![Stress=-Press](https://latex.codecogs.com/gif.latex?%5Csigma%3D-P).
-Uniaxial elongational viscosity is calculated by
-![Elongational viscosity](https://latex.codecogs.com/gif.latex?%5Ceta_%7B%5Crm%20uni%7D%3D%5C%7B%5Csigma_%7Bzz%7D-%28%5Csigma_%7Bxx%7D&plus;%5Csigma_%7Byy%7D%29/2%5C%7D/%5Cdot%7B%5Cvarepsilon%7D).
-Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3Dd%5Cvarepsilon/dt%28%3D0.001%29) is the elongational rate.
-
-Since the raw data of the elongational viscosity is noisy,
-we apply Savitzky-Golay filter to smooth out the high frequency noise in `smooth.py`.
-Finally, we will get the above graph using gnuplot.
 
 ## GIF animation
 First, install OVITO python module.
@@ -80,3 +52,34 @@ compute rmatrix all rotation/uefex         # compute rotation matrix
 
 Particle positions and the unit cell saved in a LAMMPS data file are not consistent with the elongational directions under UEF.
 To correct this, a rotation matrix is multiplied to the particle positions and the unit cell in `anim.py`.
+
+
+## Elongational viscosity
+First, install `numpy`, `scipy`, `pandas`, and `gnuplot`.
+
+Then, run the following commands.
+```
+mpirun ./lmp -in in.uefex
+python smooth.py
+gnuplot visc.plt
+```
+You will get the following image (PNG file).
+
+<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/visc.png" title="Elongational viscosity" width=300/>
+
+`in.uefex` produces `press.txt`. The first 4 lines of this text file will start as follows.
+```
+# Time-averaged data for fix a1
+# TimeStep v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
+0 4.81638 4.70122 5.01902 0.0253983 0.0392435 0.0244829
+100 4.63578 4.60468 4.80104 0.120378 -0.029315 -0.0383236
+```
+The first column is "Time Step". To obtain "Time", you need to multiply ![dt](https://latex.codecogs.com/gif.latex?%5CDelta%20t%20%28%3D0.01%29) to this column values.
+The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" ![Stress=-Press](https://latex.codecogs.com/gif.latex?%5Csigma%3D-P).
+Uniaxial elongational viscosity is calculated by
+![Elongational viscosity](https://latex.codecogs.com/gif.latex?%5Ceta_%7B%5Crm%20uni%7D%3D%5C%7B%5Csigma_%7Bzz%7D-%28%5Csigma_%7Bxx%7D&plus;%5Csigma_%7Byy%7D%29/2%5C%7D/%5Cdot%7B%5Cvarepsilon%7D).
+Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3Dd%5Cvarepsilon/dt%28%3D0.001%29) is the elongational rate.
+
+Since the raw data of the elongational viscosity is noisy,
+we apply Savitzky-Golay filter to smooth out the high frequency noise in `smooth.py`.
+Finally, we will get the above graph using gnuplot.
