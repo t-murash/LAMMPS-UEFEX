@@ -34,8 +34,11 @@ variable pxy equal c_mypress[4]
 variable pxz equal c_mypress[5]
 variable pyz equal c_mypress[6]
 
-thermo_style custom step cpu c_mytemp &
+thermo_style custom step cpu cpuremain c_mytemp &
 v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
+
+variable freq string 100
+fix a1 all ave/time ${freq} 1 ${freq} v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz file press.txt
 
 run 1000000
 

@@ -13,6 +13,19 @@
 - in.uefex.uni : Example for fix_modify u option
 - in.uefex.uni.integrate : Example for fix_modify ui option
 
+## Elongational viscosity
+First, install `numpy`, `scipy`, `pandas`, and `gnuplot`.
+
+Then, run the following commands.
+```
+mpirun ./lmp -in in.uefex
+python smooth.py
+gnuplot visc.plt
+```
+You will get the following image (PNG file).
+
+<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/visc.png" title="Elongational viscosity" width=300/>
+
 ## GIF animation
 First, install OVITO python module.
 - [OVITO](https://www.ovito.org/python-downloads/)
