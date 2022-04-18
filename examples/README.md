@@ -38,11 +38,11 @@ You will get the following image (PNG file).
 0 4.81638 4.70122 5.01902 0.0253983 0.0392435 0.0244829
 100 4.63578 4.60468 4.80104 0.120378 -0.029315 -0.0383236
 ```
-The first column is "Time Step". To obtain "Time", you need to multiply ![dt](https://latex.codecogs.com/gif.latex?%5CDelta%20t%20%3D%200.01) to this column values.
+The first column is "Time Step". To obtain "Time", you need to multiply ![dt](https://latex.codecogs.com/gif.latex?%5CDelta%20t%20%28%3D0.01%29) to this column values.
 The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" ![Stress=-Press](https://latex.codecogs.com/gif.latex?%5Csigma%3D-P).
 Uniaxial elongational viscosity is calculated by
 ![Elongational viscosity](https://latex.codecogs.com/gif.latex?%5Ceta_%7B%5Crm%20uni%7D%3D%5C%7B%5Csigma_%7Bzz%7D-%28%5Csigma_%7Bxx%7D&plus;%5Csigma_%7Byy%7D%29/2%5C%7D/%5Cdot%7B%5Cvarepsilon%7D).
-Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3Dd%5Cvarepsilon/dt) is the elongational rate.
+Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3Dd%5Cvarepsilon/dt%28%3D0.001%29) is the elongational rate.
 
 Since the raw data of the elongational viscosity is noisy,
 we apply Savitzky-Golay filter to smooth out high frequency noise in `smooth.py`.
