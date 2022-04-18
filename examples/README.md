@@ -2,7 +2,7 @@
 
 ## Contents
 
-|file|description|
+| file name | explanation |
 | ---- | ----------- |
 | N100M100.data | Configuration data of Kremer-Grest model with N=100 and M=100 |
 | README.md | This document |
@@ -16,7 +16,7 @@
 | in.uefex.uni           | Example for fix_modify u option |
 | in.uefex.uni.integrate | Example for fix_modify ui option |
 | smooth.py              | Python script for smoothing data |
-| visc.plt               | gnuplot script for processing a graph of viscosity growth |
+| visc.plt               | Gnuplot script for processing a graph of viscosity growth |
 
 ## Elongational viscosity
 First, install `numpy`, `scipy`, `pandas`, and `gnuplot`.
