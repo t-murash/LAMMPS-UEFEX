@@ -104,6 +104,6 @@ mpirun ./lmp -in in.example
 
 Users of this package are encouraged to cite the following articles in scientific publications:
 
-* D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.*, **145** (24), 244903 (2016), http://aip.scitation.org/doi/full/10.1063/1.4972894.
+* D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.*, **145** (24), 244903 (2016), https://doi.org/10.1063/1.4972894.
 
 * T. Murashima, K. Hagita, T. Kawakatsu, "Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation", *Nihon Reoroji Gakkaishi (J. Soc. Rheol. Jpn.)* , **46** (5), 207-220 (2018), https://doi.org/10.1678/rheology.46.207.
