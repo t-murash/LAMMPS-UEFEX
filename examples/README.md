@@ -1,8 +1,9 @@
 # UEFEX/examples
 
 ## Contents
+
 |file|description|
----
+| ---- | ----------- |
 | N100M100.data | Configuration data of Kremer-Grest model with N=100 and M=100 |
 | README.md | This document |
 | anim.py   | Python script for processing a snapshot of polymers (PNG) |
