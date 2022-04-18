@@ -41,7 +41,9 @@ You will get the following image (PNG file).
 The first column is "Time Step". To obtain "Time", you need to multiply ![dt](https://latex.codecogs.com/gif.latex?%5CDelta%20t%20%3D%200.01) to this column values.
 The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" ![Stress=-Press](https://latex.codecogs.com/gif.latex?%5Csigma%3D-P).
 Uniaxial elongational viscosity is calculated by
-![Elongational viscosity](https://latex.codecogs.com/gif.latex?%5Ceta_%7B%5Crm%20uni%7D%3D%5C%7B%5Csigma_%7Bzz%7D-%28%5Csigma_%7Bxx%7D&plus;%5Csigma_%7Byy%7D%29/2%5C%7D/%5Cdot%7B%5Cvarepsilon%7D).
+
+![Elongational viscosity](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3Dd%5Cvarepsilon/dt).
+
 Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3D%5Cfrac%7Bd%5Cvarepsilon%7D%7Bdt%7D) is the elongational rate.
 
 The raw data of the elongational viscosity is noisy.
