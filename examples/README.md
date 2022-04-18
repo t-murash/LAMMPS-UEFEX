@@ -45,8 +45,8 @@ Uniaxial elongational viscosity is calculated by
 Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3Dd%5Cvarepsilon/dt%28%3D0.001%29) is the elongational rate.
 
 Since the raw data of the elongational viscosity is noisy,
-we apply Savitzky-Golay filter to smooth out high frequency noise in `smooth.py`.
-Finally, we will get a graph using gnuplot.
+we apply Savitzky-Golay filter to smooth out the high frequency noise in `smooth.py`.
+Finally, we will get the above graph using gnuplot.
 
 ## GIF animation
 First, install OVITO python module.
