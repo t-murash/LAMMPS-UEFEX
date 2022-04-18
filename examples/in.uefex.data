@@ -37,9 +37,9 @@ write_data N100M100.after1M.data
 variable freq string 100
 fix rot all ave/time ${freq} 1 ${freq}  c_rmatrix[*] file rotation.txt
 
-variable a loop 100 pad
+variable a loop 0 100 pad
 label loop
-run 100
+if "$a > 0" then "run 100"
 write_data N100M100.$a.data
 next a
 jump SELF loop

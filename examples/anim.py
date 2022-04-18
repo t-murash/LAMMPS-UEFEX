@@ -1,4 +1,4 @@
-step=100
+step=27
 frame0=str(step).zfill(3)
 print(frame0)
 from ovito.io import import_file
@@ -18,7 +18,7 @@ with open('rotation.txt','r') as f:
     for line in f:
         line2=line.split()
         il+=1
-        if il > 2:
+        if il >= 3:
             rotdata.append(line2)
 
 def vec_rot(rot,invec,outvec):

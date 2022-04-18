@@ -29,9 +29,9 @@ You will get data files, png files, and a gif file (movie.gif) as shown in the t
 
 **movie.gif**
 
-<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/figure.001.png" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
+<img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/figure.000.png" title="M=100, N=100 Kremer-Grest chains in a uniaxial elongational flow" width=300/>
 
-**figure.001.png**
+**figure.000.png**
 
 `in.uefex.data` summarizes how to use the UEFEX package.
 ```
