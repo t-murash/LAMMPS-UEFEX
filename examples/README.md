@@ -31,6 +31,16 @@ You will get the following image (PNG file).
 
 <img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/visc.png" title="Elongational viscosity" width=300/>
 
+`in.uefex` produces `press.txt`. The first 4 lines of this text file will start as follows.
+```
+# Time-averaged data for fix a1
+# TimeStep v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
+0 4.81638 4.70122 5.01902 0.0253983 0.0392435 0.0244829
+100 4.63578 4.60468 4.80104 0.120378 -0.029315 -0.0383236
+```
+The first column is "Time Step". To obtain "Time", you need to multiply $\Delta t=0.01$ to this column values.
+The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" $\tensor{P}=-\tensor{\sigma}$
+
 ## GIF animation
 First, install OVITO python module.
 - [OVITO](https://www.ovito.org/python-downloads/)
