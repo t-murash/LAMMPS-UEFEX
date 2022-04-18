@@ -90,6 +90,8 @@ The source files in `3Mar20` are compatible with `3Mar20` of LAMMPS and the more
 Copy the source files to the above directory (`UEFEX`) according to your versions.
 Then, make or cmake in the same way as described above.
 
+**(Note)** These old versions are not updated.
+
 ## Usage
 You can find several example files in `LAMMPS-UEFEX/examples`.
 ```
