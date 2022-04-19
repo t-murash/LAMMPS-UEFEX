@@ -8,6 +8,8 @@ set title 'N=100, M=100, uniaxial strain-rate = 0.001'
 erate=0.001
 dt=0.01
 
+set encoding utf8
+set minussign
 
 p 'press_sg.txt' u (dt*$1):($2/erate) t 'Raw data' pt 65 lc rgb "blue",\
 'press_sg.txt' u (dt*$1):($3/erate) t 'Smoothed data' pt 66 lc rgb "red"
