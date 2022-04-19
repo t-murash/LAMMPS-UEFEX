@@ -24,7 +24,7 @@
 First, install OVITO python module.
 - [OVITO](https://www.ovito.org/python-downloads/)
 
-Then, run the following commands.
+Then, execute the following commands.
 ```
 mpirun ./lmp -in in.uefex.data
 bash anim.sh
@@ -57,7 +57,7 @@ To correct this, a rotation matrix is multiplied to the particle positions and t
 ## Elongational viscosity
 First, install `numpy`, `scipy`, `pandas`, and `gnuplot`.
 
-Then, run the following commands.
+Then, execute the following commands.
 ```
 mpirun ./lmp -in in.uefex
 python smooth.py
