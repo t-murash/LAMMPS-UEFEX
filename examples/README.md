@@ -67,7 +67,7 @@ You will get the following image (PNG file).
 
 <img src="https://github.com/t-murash/LAMMPS-UEFEX/blob/master/img/visc.png" title="Elongational viscosity" width=300/>
 
-`in.uefex` produces `press.txt`. The first 4 lines of this text file will start as follows.
+`mpirun ./lmp -in in.uefex` produces `press.txt`. The first 4 lines of this text file (`press.txt`) will start as follows.
 ```
 # Time-averaged data for fix a1
 # TimeStep v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz
