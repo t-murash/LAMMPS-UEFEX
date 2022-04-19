@@ -77,11 +77,11 @@ You will get the following image (PNG file).
 The first line is the comment line.
 Although this line says "Time-averaged data", the data (`press.txt`) are not time-averaged because of `${freq} 1 ${freq}` at `fix ave/time`.
 
-The first column is "Time Step". To obtain "Time", you need to multiply <img src="https://render.githubusercontent.com/render/math?math=\Delta t (=0.01)"> ![dt](https://latex.codecogs.com/gif.latex?%5CDelta%20t%20%28%3D0.01%29) to this column values.
-The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" ![Stress=-Press](https://latex.codecogs.com/gif.latex?%5Csigma%3D-P).
+The first column is "Time Step". To obtain "Time", you need to multiply <img src="https://render.githubusercontent.com/render/math?math=\Delta t (=0.01)"> to this column values.
+The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" <img src="https://render.githubusercontent.com/render/math?math=\sigma=-P">.
 Uniaxial elongational viscosity is calculated by
-![Elongational viscosity](https://latex.codecogs.com/gif.latex?%5Ceta_%7B%5Crm%20uni%7D%3D%5C%7B%5Csigma_%7Bzz%7D-%28%5Csigma_%7Bxx%7D&plus;%5Csigma_%7Byy%7D%29/2%5C%7D/%5Cdot%7B%5Cvarepsilon%7D).
-Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvarepsilon%7D%3Dd%5Cvarepsilon/dt%28%3D0.001%29) is the elongational rate.
+<img src="https://render.githubusercontent.com/render/math?math=\eta_{\rm uni}=\{\sigma_{zz}-(\sigma_{xx}+\sigma_{yy})/2\} / \dot{\varepsilon}">.
+Here, <img src="https://render.githubusercontent.com/render/math?math=\dot{\varepsilon}={\rm d}\varepsilon / {\rm d}t"> is the elongational rate.
 
 Since the raw data of the elongational viscosity is noisy,
 we apply Savitzky-Golay filter to smooth out the high frequency noise through `python smooth.py`.
