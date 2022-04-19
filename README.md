@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Apr 18, 2022<br>
+Last updated: Apr 19, 2022<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 <!--
@@ -119,6 +119,6 @@ mpirun ./lmp -in in.example
 
 Users of this package are encouraged to cite the following articles in scientific publications:
 
-* D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.*, (2016) **145** (24), 244903, https://doi.org/10.1063/1.4972894.
+* D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.* (2016) **145** (24) 244903, https://doi.org/10.1063/1.4972894.
 
-* T. Murashima, K. Hagita, T. Kawakatsu, "Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation", *Nihon Reoroji Gakkaishi (J. Soc. Rheol. Jpn.)* , (2018) **46** (5), 207-220, https://doi.org/10.1678/rheology.46.207.
+* T. Murashima, K. Hagita, T. Kawakatsu, "Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation", *Nihon Reoroji Gakkaishi (J. Soc. Rheol. Jpn.)*  (2018) **46** (5) 207-220, https://doi.org/10.1678/rheology.46.207.
