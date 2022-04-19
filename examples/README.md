@@ -75,7 +75,7 @@ You will get the following image (PNG file).
 100 4.63578 4.60468 4.80104 0.120378 -0.029315 -0.0383236
 ```
 The first line is the comment line.
-Although this line says "Time-averaged data", the data (`press.txt`) are not time-averaged because of `${freq} 1 ${freq}` at `fix ave/time`.
+Although this line says "Time-averaged data", the data (`press.txt`) are not time-averaged because of `${freq} 1 ${freq}` at `fix ave/time` in `in.uefex`.
 
 The first column is "Time Step". To obtain "Time", you need to multiply <img src="https://render.githubusercontent.com/render/math?math=\Delta t (=0.01)"> to this column values.
 The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" <img src="https://render.githubusercontent.com/render/math?math=\sigma=-P">.
