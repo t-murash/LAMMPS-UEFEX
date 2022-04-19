@@ -82,4 +82,4 @@ Here, ![Elongational rate](https://latex.codecogs.com/gif.latex?%5Cdot%7B%5Cvare
 
 Since the raw data of the elongational viscosity is noisy,
 we apply Savitzky-Golay filter to smooth out the high frequency noise in `smooth.py`.
-Finally, we will get the above graph using gnuplot.
+Finally, we will get the above graph using `gnuplot`.
