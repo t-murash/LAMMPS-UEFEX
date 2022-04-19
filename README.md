@@ -28,6 +28,7 @@ Download and install LAMMPS and the UEF package according to the following sites
 
 **(Note)** The UEF package has been included in LAMMPS several years ago. You **DO NOT** need to get the UEF package from Rutledge Group's site.
 
+### Build LAMMPS with make
 ```
 wget https://download.lammps.org/tars/lammps-stable.tar.gz
 tar xvf lammps-stable.tar.gz
@@ -53,28 +54,39 @@ cd lammps-*/src/
 make mpi mode=static
 ```
 
-## For cmake users
+### Build LAMMPS with cmake
 
 ```
 wget https://download.lammps.org/tars/lammps-stable.tar.gz
 tar xvf lammps-stable.tar.gz
-git clone https://github.com/t-murash/LAMMPS-UEFEX.git
+git clone https://github.com/t-murash/LAMMPS-UEFEX
 cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
 mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
 ```
 
 Edit the following files to include `UEFEX`.
-
 ```
 lammps-*/cmake/CMakeLists.txt
 lammps-*/cmake/presets/all_off.cmake
 lammps-*/cmake/presets/all_on.cmake
 ```
-The easiest way is, find `UEF` in the above files and place `UEFEX` below `UEF`.
 
+The easiest way is, find `UEF` in the above files and place `UEFEX` below `UEF`.
+Namely, edit the following part
+```
+  TALLY
+  UEF
+  VORONOI
+```
+to
+```
+  TALLY
+  UEF
+  UEFEX
+  VORONOI
+```
 
 Then, build using `cmake` with `-DPKG_UEFEX=yes`
-
 ```
 cd lammps-*
 mkdir build
@@ -83,14 +95,14 @@ cmake ../cmake -DBUILD_MPI=yes -DPKG_MOLECULE=yes -DPKG_UEF=yes -DPKG_UEFEX=yes
 make
 ```
 
-## For old version users (29Oct20, 3Mar20)
+### For old version users (29Oct20, 3Mar20)
 You can find `29Oct20` and `3Mar20` directories in `lammps-*/src/UEFEX`.
 `29Oct20` contains source files compatible with `29Oct20` of LAMMPS.
 The source files in `3Mar20` are compatible with `3Mar20` of LAMMPS and the more previous versions of LAMMPS.
 Copy the source files to the above directory (`UEFEX`) according to your versions.
 Then, make or cmake in the same way as described above.
 
-**(Note)** These old versions are not updated.
+**(Note)** These old versions are not up-to-date.
 
 ## Usage
 You can find several example files in `LAMMPS-UEFEX/examples`.
@@ -107,6 +119,6 @@ mpirun ./lmp -in in.example
 
 Users of this package are encouraged to cite the following articles in scientific publications:
 
-* D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.*, **145** (24), 244903 (2016), https://doi.org/10.1063/1.4972894.
+* D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.*, (2016) **145** (24), 244903, https://doi.org/10.1063/1.4972894.
 
-* T. Murashima, K. Hagita, T. Kawakatsu, "Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation", *Nihon Reoroji Gakkaishi (J. Soc. Rheol. Jpn.)* , **46** (5), 207-220 (2018), https://doi.org/10.1678/rheology.46.207.
+* T. Murashima, K. Hagita, T. Kawakatsu, "Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation", *Nihon Reoroji Gakkaishi (J. Soc. Rheol. Jpn.)* , (2018) **46** (5), 207-220, https://doi.org/10.1678/rheology.46.207.
