@@ -81,7 +81,7 @@ The first column is "Time Step". To obtain "Time", you need to multiply <img src
 The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" <img src="https://render.githubusercontent.com/render/math?math=\sigma=-P">.
 Uniaxial elongational viscosity is calculated by
 <img src="https://render.githubusercontent.com/render/math?math=\eta_{\rm uni}=\{\sigma_{zz}-(\sigma_{xx} %2B \sigma_{yy})/2 \} / \dot{\varepsilon}">.
-Here, <img src="https://render.githubusercontent.com/render/math?math=\dot{\varepsilon}={\rm d}\varepsilon / {\rm d}t"> is the elongational rate.
+Here, <img src="https://render.githubusercontent.com/render/math?math=\dot{\varepsilon}={\rm d}\varepsilon / {\rm d}t (=0.001)"> is the elongational rate.
 
 Since the raw data of the elongational viscosity is noisy,
 we apply Savitzky-Golay filter to smooth out the high frequency noise through `python smooth.py`.
