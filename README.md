@@ -96,10 +96,10 @@ make
 ```
 
 ### For old version users (29Oct20, 3Mar20)
-You can find `29Oct20` and `3Mar20` directories in `lammps-*/src/UEFEX`.
+You can find `29Oct20` and `3Mar20` directories in `LAMMPS-UEFEX/UEFEX/old`.
 `29Oct20` contains source files compatible with `29Oct20` of LAMMPS.
 The source files in `3Mar20` are compatible with `3Mar20` of LAMMPS and the more previous versions of LAMMPS.
-Copy the source files to the above directory (`UEFEX`) according to your versions.
+Copy the source files to the `lammps-*/src/UEFEX` directory according to your versions.
 Then, make or cmake in the same way as described above.
 
 **(Note)** These old versions are not up-to-date.
