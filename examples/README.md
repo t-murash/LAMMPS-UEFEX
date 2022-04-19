@@ -75,7 +75,7 @@ You will get the following image (PNG file).
 100 4.63578 4.60468 4.80104 0.120378 -0.029315 -0.0383236
 ```
 The first line is the comment line.
-Although this line says "Time-averaged data", the data (`press.txt`) are not time-averaged because of '${freq} 1 ${freq}' at `fix ave/time`.
+Although this line says "Time-averaged data", the data (`press.txt`) are not time-averaged because of `${freq} 1 ${freq}` at `fix ave/time`.
 
 The first column is "Time Step". To obtain "Time", you need to multiply ![dt](https://latex.codecogs.com/gif.latex?%5CDelta%20t%20%28%3D0.01%29) to this column values.
 The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" ![Stress=-Press](https://latex.codecogs.com/gif.latex?%5Csigma%3D-P).
