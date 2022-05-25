@@ -71,8 +71,11 @@ void ComputePressureUefex::init()
   ifix_uef=i;
   ((FixNVEUefex*) modify->fix[ifix_uef])->get_ext_flags(ext_flags);
 
-  if (strcmp(temperature->style,"temp/uefex") != 0)
-    error->warning(FLERR,"The temperature used in compute pressure/uefex is not of style temp/uefex");
+  // 2022/05/25 by TM
+  if(keflag){
+    if (strcmp(temperature->style,"temp/uefex") != 0)
+      error->warning(FLERR,"The temperature used in compute pressure/uefex is not of style temp/uefex");
+  }
 
 }
 
@@ -84,7 +87,15 @@ void ComputePressureUefex::init()
 double ComputePressureUefex::compute_scalar()
 {
 
-  temperature->compute_scalar(); // Streaming velocity is considered in compute_temp_uefex.cpp
+  // 2022/05/25 by TM
+  //temperature->compute_scalar();
+  // Streaming velocity is considered in compute_temp_uefex.cpp
+  double t;
+  if (keflag) {
+    if (temperature->invoked_scalar != update->ntimestep)
+      t = temperature->compute_scalar();
+    else t = temperature->scalar;
+  }
 
   // if all pressures are external the scalar is found as normal
   if (ext_flags[0] && ext_flags[1] && ext_flags[2])
