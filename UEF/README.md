@@ -4,7 +4,7 @@
 
 ## Instalation
 
-Copy `compute_pressure_uef.cpp` here into `${lammps source directory}/UEF`.
+Copy `compute_pressure_uef.cpp` to `${lammps source directory}/UEF`.
 
 Then, `cmake` or `make`.
 
