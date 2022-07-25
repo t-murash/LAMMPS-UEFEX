@@ -1,5 +1,4 @@
-/*
-  ----------------------------------------------------------------------
+/* -*- c++ -*- ----------------------------------------------------------
   LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
   https://www.lammps.com 
   Steve Plimpton, sjplimp@sandia.gov, Sandia National Laboratories
@@ -17,28 +16,29 @@
 
 #ifdef COMPUTE_CLASS
 
-ComputeStyle(pressure/uefex,ComputePressureUefex);
+ComputeStyle(rotation/uefex,ComputeRotationUefex)
 
 #else
 
-#ifndef LMP_COMPUTE_PRESSURE_UEFEX_H
-#define LMP_COMPUTE_PRESSURE_UEFEX_H
+#ifndef LMP_COMPUTE_ROTATION_UEFEX_H
+#define LMP_COMPUTE_ROTATION_UEFEX_H
 
-#include "compute_pressure.h"
-#include "compute_pressure_uef.h"
+#include "compute.h"
 
 namespace LAMMPS_NS {
 
-  class ComputePressureUefex : public ComputePressureUef {
-  public:
-    ComputePressureUefex(class LAMMPS *, int, char **);
-    virtual ~ComputePressureUefex()override{}
-    virtual void init() override;
-    virtual double compute_scalar() override;
-    virtual void compute_vector() override;
-    void update_rot();
-  };
+class ComputeRotationUefex : public Compute {
+ public:
+  ComputeRotationUefex(class LAMMPS *, int, char **);
+  virtual ~ComputeRotationUefex();
+  virtual void init();
+  virtual void compute_vector();
 
+ protected:
+  int ifix_uef;
+  double rot[3][3];
+  int uef_flag;// 0:nve/uefex, 1:nvt/uef, 2:npt/uef
+};
 
 }
 
@@ -51,11 +51,11 @@ namespace LAMMPS_NS {
    This class inherits most of the warnings from ComputePressure. The
    only addition is:
 
-   E: Can't use compute pressure/uefex without defining a fix nve/uefex
+   E: Can't use compute rotation/uefex without defining fix nve/uefex or fix nvt/uef or fix npt/uef
 
    Self-explanatory.  
 
-   W: The temperature used in compute pressure/uefex is not of style temp/uefex
+   W: The temperature used in compute rotation/uefex is not of style temp/uefex
 
    Self-explanatory.
 

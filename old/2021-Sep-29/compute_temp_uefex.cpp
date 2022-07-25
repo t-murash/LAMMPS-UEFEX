@@ -167,7 +167,7 @@ void ComputeTempUefex::compute_vector()
   if (rot_flag)
   {
     double rot[3][3];
-    (dynamic_cast<FixNVEUefex*>( modify->fix[ifix_uef]))->get_rot(rot);
+    ( (FixNVEUefex*) modify->fix[ifix_uef])->get_rot(rot);
     virial_rot(vector,rot);
   }
   // rot_flag, virial_rot are found in compute_temp_uef

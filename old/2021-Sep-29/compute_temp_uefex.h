@@ -17,7 +17,7 @@
 
 #ifdef COMPUTE_CLASS
 
-ComputeStyle(temp/uefex,ComputeTempUefex);
+ComputeStyle(temp/uefex,ComputeTempUefex)
 
 #else
 
@@ -32,12 +32,12 @@ namespace LAMMPS_NS {
   class ComputeTempUefex : public ComputeTempUef {
   public:
     ComputeTempUefex(class LAMMPS *, int, char **);
-    virtual ~ComputeTempUefex()override{}
-    virtual void init() override;
-    virtual double compute_scalar() override; // Murashima 2018/12/25
-    virtual void compute_vector() override; // Murashima 2018/12/25
-    void remove_bias(int i, double *v) override; // Murashima 2019/01/02
-    void restore_bias(int i, double *v) override; // Murashima 2019/01/02
+    virtual ~ComputeTempUefex(){}
+    virtual void init();
+    virtual double compute_scalar(); // Murashima 2018/12/25
+    virtual void compute_vector(); // Murashima 2018/12/25
+    void remove_bias(int i, double *v); // Murashima 2019/01/02
+    void restore_bias(int i, double *v); // Murashima 2019/01/02
     
   };
 

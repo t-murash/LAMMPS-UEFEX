@@ -29,12 +29,12 @@ namespace LAMMPS_NS {
 class ComputeStressAtomUefex : public Compute {
  public:
   ComputeStressAtomUefex(class LAMMPS *, int, char **);
-  ~ComputeStressAtomUefex() override;
-  void init()override;
-  void compute_peratom()override;
-  int pack_reverse_comm(int, int, double *)override;
-  void unpack_reverse_comm(int, int *, double *)override;
-  double memory_usage()override;
+  ~ComputeStressAtomUefex();
+  void init();
+  void compute_peratom();
+  int pack_reverse_comm(int, int, double *);
+  void unpack_reverse_comm(int, int *, double *);
+  double memory_usage();
   void virial_rot(double *x, const double r[3][3]);
 
  private:

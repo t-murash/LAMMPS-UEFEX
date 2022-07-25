@@ -98,11 +98,11 @@ void ComputeRotationUefex::compute_vector()
   //    error->all(FLERR,"Rotation was not tallied on needed timestep");
 
   if(uef_flag==0){
-    (dynamic_cast<FixNVEUefex*>( modify->fix[ifix_uef]))->get_rot(rot);
+    ((FixNVEUefex*) modify->fix[ifix_uef])->get_rot(rot);
   }else if(uef_flag==1){
-    (dynamic_cast<FixNVTUef*>( modify->fix[ifix_uef]))->get_rot(rot);
+    ((FixNVTUef*) modify->fix[ifix_uef])->get_rot(rot);
   }else if(uef_flag==2){
-    (dynamic_cast<FixNPTUef*>( modify->fix[ifix_uef]))->get_rot(rot);
+    ((FixNPTUef*) modify->fix[ifix_uef])->get_rot(rot);
   }
   
   vector[0]=rot[0][0];

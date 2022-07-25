@@ -69,12 +69,13 @@ void ComputePressureUefex::init()
     error->all(FLERR,"Can't use compute pressure/uefex without defining a fix nve/uefex");
   
   ifix_uef=i;
-  (dynamic_cast<FixNVEUefex*>( modify->fix[ifix_uef]))->get_ext_flags(ext_flags);
+  ((FixNVEUefex*) modify->fix[ifix_uef])->get_ext_flags(ext_flags);
 
   // 2022/05/25 by TM
-  if (strcmp(temperature->style,"temp/uefex") != 0)
-    error->warning(FLERR,"The temperature used in compute pressure/uefex is not of style temp/uefex");
-
+  if(keflag){
+    if (strcmp(temperature->style,"temp/uefex") != 0)
+      error->warning(FLERR,"The temperature used in compute pressure/uefex is not of style temp/uefex");
+  }
 
 }
 
@@ -150,8 +151,7 @@ void ComputePressureUefex::compute_vector()
   
   
   if (keflag) {
-    if (temperature->invoked_vector != update->ntimestep)
-      temperature->compute_vector();
+    if (temperature->invoked_vector != update->ntimestep)temperature->compute_vector();
     ke_tensor = temperature->vector; // temp/uefex obtains thermal tensor of LAB frame value.
   }
 
@@ -164,9 +164,8 @@ void ComputePressureUefex::compute_vector()
     */
 
     double r[3][3];
-    ( dynamic_cast<FixNVEUefex*>( modify->fix[ifix_uef]))->get_rot(r);
-    virial_rot(virial,r);
-    // LAMMPS(UT) to LAB, virial_rot is defined in compute_pressure_uef.cpp
+    ( (FixNVEUefex*) modify->fix[ifix_uef])->get_rot(r);
+    virial_rot(virial,r); // LAMMPS(UT) to LAB, virial_rot is defined in compute_pressure_uef.cpp
     /*
       Now, virial is LAB frame value
      */
@@ -206,9 +205,4 @@ void ComputePressureUefex::compute_vector()
   // [ 5 1 3 ]
   // [ 4 3 2 ]
   
-}
-
-void ComputePressureUefex::update_rot()
-{
-    ( dynamic_cast<FixNVEUefex*>( modify->fix[ifix_uef]))->get_rot(rot);
 }

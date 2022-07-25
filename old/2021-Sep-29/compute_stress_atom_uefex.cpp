@@ -243,19 +243,22 @@ void ComputeStressAtomUefex::compute_peratom()
   //   and fix ave/spatial uses a per-atom stress from this compute as input
 
   if (fixflag) {
-    for (auto &ifix : modify->get_fix_list())
-      if (ifix->virial_peratom_flag && ifix->thermo_virial) {
-        double **vatom = ifix->vatom;
+    Fix **fix = modify->fix;
+    int nfix = modify->nfix;
+    for (int ifix = 0; ifix < nfix; ifix++)
+      if (fix[ifix]->virial_peratom_flag && fix[ifix]->thermo_virial) {
+        double **vatom = fix[ifix]->vatom;
         if (vatom)
           for (i = 0; i < nlocal; i++)
-            for (j = 0; j < 6; j++) stress[i][j] += vatom[i][j];
+            for (j = 0; j < 6; j++)
+              stress[i][j] += vatom[i][j];
       }
   }
 
   // communicate ghost virials between neighbor procs
 
   if (force->newton || (force->kspace && force->kspace->tip4pflag))
-    comm->reverse_comm(this);
+    comm->reverse_comm_compute(this);
 
   // zero virial of atoms not in group
   // only do this after comm since ghost contributions must be included
@@ -362,11 +365,11 @@ void ComputeStressAtomUefex::compute_peratom()
     }
 
   if(uef_flag==0){
-    (dynamic_cast<FixNVEUefex*>( modify->fix[ifix_uef]))->get_rot(rot);
+    ((FixNVEUefex*) modify->fix[ifix_uef])->get_rot(rot);
   }else if(uef_flag==1){
-    (dynamic_cast<FixNVTUef*>( modify->fix[ifix_uef]))->get_rot(rot);
+    ((FixNVTUef*) modify->fix[ifix_uef])->get_rot(rot);
   }else if(uef_flag==2){
-    (dynamic_cast<FixNPTUef*>( modify->fix[ifix_uef]))->get_rot(rot);
+    ((FixNPTUef*) modify->fix[ifix_uef])->get_rot(rot);
   }
   
   for (i = 0; i < nlocal; i++){

@@ -15,7 +15,7 @@
 
 
 #ifdef FIX_CLASS
-FixStyle(nve/uefex,FixNVEUefex);
+FixStyle(nve/uefex,FixNVEUefex)
 #else
 
 #ifndef LMP_FIX_NVE_UEFEX_H
@@ -32,23 +32,23 @@ namespace LAMMPS_NS {
   class FixNVEUefex : public Fix {
   public:
     FixNVEUefex(class LAMMPS *, int, char **);
-    virtual ~FixNVEUefex() override;
-    virtual int setmask() override; 
-    virtual void init() override;
-    virtual void setup(int) override; 
-    virtual void pre_exchange() override;
-    virtual void write_restart(FILE *) override; 
+    virtual ~FixNVEUefex();
+    virtual int setmask(); 
+    virtual void init();
+    virtual void setup(int); 
+    virtual void pre_exchange();
+    void write_restart(FILE *); 
     virtual int pack_restart_data(double*);
     virtual void restart(char *);
-    virtual void end_of_step() override;
-    virtual void initial_integrate(int) override;
-    virtual void final_integrate() override;
-    virtual void initial_integrate_respa(int, int, int) override;
-    virtual void final_integrate_respa(int, int) override;
-    virtual void post_run() override;
+    virtual void end_of_step();
+    virtual void initial_integrate(int);
+    virtual void final_integrate();
+    virtual void initial_integrate_respa(int, int, int);
+    virtual void final_integrate_respa(int, int);
+    virtual void post_run();
 
     // fix_nh
-    int modify_param(int, char **) override;
+    int modify_param(int, char **);
     //void reset_target(double);
     //void reset_dt();
     //virtual void *extract(const char*, int &);
@@ -85,6 +85,10 @@ namespace LAMMPS_NS {
     //void set_h_rate_from_box(); // Murashima 2019/01/02
     int remapflag; // same as fix_deform.h
 
+
+
+
+  
 
   protected:
     virtual void remap();

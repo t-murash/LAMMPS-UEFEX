@@ -45,12 +45,12 @@ using namespace FixConst;
 
 enum{NOBIAS,BIAS};
 enum{ISO,ANISO,TRICLINIC};
-//enum{NO_REMAP, X_REMAP, V_REMAP}; // same as fix_deform.cpp
+enum{NO_REMAP, X_REMAP, V_REMAP}; // same as fix_deform.cpp
 
 // citation info
 
 static const char cite_user_uef_package[] =
-  "UEF package:\n\n"
+  "USER-UEF package:\n\n"
   "@Article{NicholsonRutledge16,\n"
   "author = {David A. Nicholson and Gregory C. Rutledge},\n"
   "title = {Molecular simulation of flow-enhanced nucleation in n-eicosane melt\
@@ -63,7 +63,7 @@ s under steady shear and uniaxial extension},\n"
   "}\n\n";
 
 static const char cite_user_uefex_package[] =
-  "UEFEX package:\n\n"
+  "USER-UEFEX package:\n\n"
   "@Article{MurashimaHagitaKawakatsu18,\n"
   "author = {Takahiro Murashima, Katsumi Hagita, and Toshihiro Kawakatsu},\n"
   "title = {Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation},\n"
@@ -76,7 +76,8 @@ static const char cite_user_uefex_package[] =
 
 
 FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
-  Fix(lmp, narg, arg), uefbox(nullptr)
+  Fix(lmp, narg, arg),
+  rfix(NULL),id_dilate(NULL),irregular(NULL),id_temp(NULL),id_press(NULL)
 {
 
   if(lmp->citeme){
@@ -95,7 +96,7 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
   extvector = 0;
 
   allremap = 1;
-  //id_dilate = NULL;
+  id_dilate = NULL;
 
   //initialization
   erate[0] = erate[1] = 0;
@@ -107,7 +108,6 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
   bool erate_flag = false;
   eng_flag = false; // 2021/10/20 by TM
   int iarg = 3;
-
   while (iarg <narg)
     {
       if (strcmp(arg[iarg],"erate")==0) {
@@ -138,7 +138,7 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
 	error->all(FLERR,"Illegal fix nve/uefex command");
 
     }
-
+  
   if (!erate_flag)
     error->all(FLERR,"Keyword erate must be set for fix nve/uefex command");
 
@@ -156,16 +156,12 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
   pre_exchange_flag = 1;
   irregular = new Irregular(lmp);
 
-
-  
   // flag that I change the box here (in case of nvt)
   box_change |= BOX_CHANGE_SHAPE;
 
   // initialize the UEFBox class which computes the box at each step
   uefbox = new UEF_utils::UEFBox();
   uefbox->set_strain(strain[0],strain[1]);
-
-
 
   // reset fixedpoint to the stagnation point. I don't allow fixedpoint 
   // to be set by the user.
@@ -179,13 +175,8 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
   modify->add_compute(fmt::format("{} all temp/uefex",id_temp));
   tcomputeflag = 1;
 
-
-
   id_press = utils::strdup(std::string(id) + "_press");
   modify->add_compute(fmt::format("{} all pressure/uefex {}",id_press, id_temp));
-
-
-  
   pcomputeflag = 1;
   nevery = 1;
 
@@ -201,14 +192,16 @@ FixNVEUefex::FixNVEUefex(LAMMPS *lmp, int narg, char **arg) :
  * ---------------------------------------------------------------------- */
 FixNVEUefex::~FixNVEUefex()
 {
-  //delete [] id_dilate;
-  //delete [] rfix;
+  delete [] id_dilate;
+  delete [] rfix;
   delete irregular;
   delete uefbox;
   modify->delete_compute(id_temp);
   delete [] id_temp;
   modify->delete_compute(id_press);
   delete [] id_press;
+
+
 }
 
 /* ----------------------------------------------------------------------
@@ -261,7 +254,7 @@ void FixNVEUefex::init()
   // Murashiam 2018/12/31
   //dtv = update->dt; set in fix_nh.cpp
   dt_inv=1.0/dtv;
-  remapflag=Domain::V_REMAP;
+  remapflag=V_REMAP;
 
   if (strstr(update->integrate_style,"respa")) {
     nlevels_respa = ((Respa *) update->integrate)->nlevels;
@@ -269,11 +262,9 @@ void FixNVEUefex::init()
     dto = 0.5*step_respa[0];
   }
 
-  /*
   delete [] rfix;
   nrigid = 0;
   rfix = NULL;
-
 
   for (int i = 0; i < modify->nfix; i++)
     if (modify->fix[i]->rigid_flag) nrigid++;
@@ -283,7 +274,6 @@ void FixNVEUefex::init()
     for (int i = 0; i < modify->nfix; i++)
       if (modify->fix[i]->rigid_flag) rfix[nrigid++] = i;
   }
-  */
 
 
 
@@ -346,6 +336,7 @@ int FixNVEUefex::modify_param(int narg, char **arg){
     double frate=utils::numeric(FLERR,arg[2],false,lmp);
     integrate_max_step=utils::numeric(FLERR,arg[3],false,lmp);
     delta_erate=(frate-irate)/(double)integrate_max_step;
+    //printf("%lf %lf %ld %.16f\n",irate,frate,integrate_max_step,delta_erate);
     integrate_flag=1;
     integrate_step=0;
     
@@ -378,9 +369,9 @@ void FixNVEUefex::setup(int j)
     error->all(FLERR,"Initial box is not close enough to the expected uef box");
 
   uefbox->get_rot(rot);
-  (dynamic_cast<ComputeTempUefex*>( temperature))->yes_rot();
-  (dynamic_cast<ComputePressureUefex*>( pressure))->in_fix = true;
-  (dynamic_cast<ComputePressureUefex*>( pressure))->update_rot();
+  ((ComputeTempUefex*) temperature)->yes_rot();
+  ((ComputePressureUefex*) pressure)->in_fix = true;
+  ((ComputePressureUefex*) pressure)->update_rot();
 
 }
 
@@ -392,13 +383,13 @@ void FixNVEUefex::initial_integrate(int vflag)
   inv_rotate_x(rot);
   inv_rotate_v(rot);
   inv_rotate_f(rot);
-  (dynamic_cast<ComputeTempUefex*>( temperature))->no_rot();// LAB
+  ((ComputeTempUefex*) temperature)->no_rot();// LAB
   nve_v();
   nve_x();
   rotate_x(rot);
   rotate_v(rot);
   rotate_f(rot);
-  (dynamic_cast<ComputeTempUefex*>( temperature))->yes_rot();// LAMMPS(UT)
+  ((ComputeTempUefex*) temperature)->yes_rot();// LAMMPS(UT)
 }
 
 /* ----------------------------------------------------------------------
@@ -407,14 +398,14 @@ void FixNVEUefex::initial_integrate(int vflag)
 void FixNVEUefex::final_integrate()
 {
   // update rot here since it must directly follow the virial calculation
-  (dynamic_cast<ComputePressureUefex*>( pressure))->update_rot();
+  ((ComputePressureUefex*) pressure)->update_rot();
   inv_rotate_v(rot);
   inv_rotate_f(rot);
-  (dynamic_cast<ComputeTempUefex*>( temperature))->no_rot();// LAB
+  ((ComputeTempUefex*) temperature)->no_rot();// LAB
   nve_v();
   rotate_v(rot);
   rotate_f(rot);
-  (dynamic_cast<ComputeTempUefex*>( temperature))->yes_rot();// LAMMPS(UT)
+  ((ComputeTempUefex*) temperature)->yes_rot();// LAMMPS(UT)
 
   if(integrate_flag>0){
     if(integrate_step>=integrate_max_step){
@@ -1207,7 +1198,7 @@ void FixNVEUefex::inv_rotate() // LAMMPS(UT) to LAB
   inv_rotate_x(rot);
   inv_rotate_v(rot);
   inv_rotate_f(rot);
-  (dynamic_cast<ComputeTempUefex*>( temperature))->no_rot();
+  ((ComputeTempUefex*) temperature)->no_rot();
 }
 
 // Murashima 2018/12/25
@@ -1217,7 +1208,7 @@ void FixNVEUefex::rotate() // LAB to LAMMPS(UT)
   rotate_x(rot);
   rotate_v(rot);
   rotate_f(rot);
-  (dynamic_cast<ComputeTempUefex*>( temperature))->yes_rot();
+  ((ComputeTempUefex*) temperature)->yes_rot();
 }
 
 

@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Apr 19, 2022<br>
+Last updated: Jul 25, 2022<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 <!--
@@ -28,31 +28,6 @@ Download and install LAMMPS and the UEF package according to the following sites
 
 **(Note)** The UEF package has been included in LAMMPS several years ago. You **DO NOT** need to get the UEF package from Rutledge Group's site.
 
-### Build LAMMPS with make
-```
-wget https://download.lammps.org/tars/lammps-stable.tar.gz
-tar xvf lammps-stable.tar.gz
-cd lammps-*/src/
-make yes-molecule
-make yes-uef
-```
-(`yes-molecule` is necessary for examples.)
-
-Then, get this package and install.
-
-```
-git clone https://github.com/t-murash/LAMMPS-UEFEX.git
-cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
-cd lammps-*/src/
-make yes-uefex
-```
-
-Finally, compile LAMMPS.
-
-```
-cd lammps-*/src/
-make mpi mode=static
-```
 
 ### Build LAMMPS with cmake
 
@@ -95,10 +70,40 @@ cmake ../cmake -DBUILD_MPI=yes -DPKG_MOLECULE=yes -DPKG_UEF=yes -DPKG_UEFEX=yes
 make
 ```
 
-### For old version users (29Oct20, 3Mar20)
-You can find `29Oct20` and `3Mar20` directories in `LAMMPS-UEFEX/UEFEX/old`.
-`29Oct20` contains source files compatible with `29Oct20` of LAMMPS.
-The source files in `3Mar20` are compatible with `3Mar20` of LAMMPS and the more previous versions of LAMMPS.
+
+### Build LAMMPS with make
+```
+wget https://download.lammps.org/tars/lammps-stable.tar.gz
+tar xvf lammps-stable.tar.gz
+cd lammps-*/src/
+make yes-molecule
+make yes-uef
+```
+(`yes-molecule` is necessary for examples.)
+
+Then, get this package and install.
+
+```
+git clone https://github.com/t-murash/LAMMPS-UEFEX.git
+cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
+cd lammps-*/src/
+make yes-uefex
+```
+
+Finally, compile LAMMPS.
+
+```
+cd lammps-*/src/
+make mpi mode=static
+```
+
+
+
+### For old version users (29Sep2021, 29Oct20, 3Mar20)
+You can find `2021-Sep-29`, `2020-Oct-29`, and `2020-Mar-3` directories in `LAMMPS-UEFEX/UEFEX/old`.
+`2021-Sep-29` contains source files compatible with `29Sep2021` of LAMMPS.
+`2020-Oct-29` contains source files compatible with `29Oct2020` of LAMMPS.
+The source files in `2020-Mar-3` are compatible with `3Mar20` of LAMMPS and the more previous versions of LAMMPS.
 Copy the source files to the `lammps-*/src/UEFEX` directory according to your versions.
 Then, make or cmake in the same way as described above.
 

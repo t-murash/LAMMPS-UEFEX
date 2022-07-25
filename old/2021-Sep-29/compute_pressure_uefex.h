@@ -1,7 +1,7 @@
 /*
   ----------------------------------------------------------------------
   LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
-  https://www.lammps.org/ 
+  https://www.lammps.com 
   Steve Plimpton, sjplimp@sandia.gov, Sandia National Laboratories
 
   Copyright (2003) Sandia Corporation.  Under the terms of Contract
@@ -17,28 +17,25 @@
 
 #ifdef COMPUTE_CLASS
 
-ComputeStyle(temp/uefex,ComputeTempUefex);
+ComputeStyle(pressure/uefex,ComputePressureUefex)
 
 #else
 
-#ifndef LMP_COMPUTE_TEMP_UEFEX_H
-#define LMP_COMPUTE_TEMP_UEFEX_H
+#ifndef LMP_COMPUTE_PRESSURE_UEFEX_H
+#define LMP_COMPUTE_PRESSURE_UEFEX_H
 
-#include "compute_temp.h"
-#include "compute_temp_uef.h"
+#include "compute_pressure.h"
+#include "compute_pressure_uef.h"
 
 namespace LAMMPS_NS {
 
-  class ComputeTempUefex : public ComputeTempUef {
+  class ComputePressureUefex : public ComputePressureUef {
   public:
-    ComputeTempUefex(class LAMMPS *, int, char **);
-    virtual ~ComputeTempUefex()override{}
-    virtual void init() override;
-    virtual double compute_scalar() override; // Murashima 2018/12/25
-    virtual void compute_vector() override; // Murashima 2018/12/25
-    void remove_bias(int i, double *v) override; // Murashima 2019/01/02
-    void restore_bias(int i, double *v) override; // Murashima 2019/01/02
-    
+    ComputePressureUefex(class LAMMPS *, int, char **);
+    virtual ~ComputePressureUefex(){}
+    virtual void init();
+    virtual double compute_scalar();
+    virtual void compute_vector();
   };
 
 
@@ -47,12 +44,17 @@ namespace LAMMPS_NS {
 #endif
 #endif
 
-/* ERROR/WARNING messages:
+/*
+   ERROR/WARNING messages:
 
    This class inherits most of the warnings from ComputePressure. The
    only addition is:
 
-   E: Can't use compute temp/uefex without defining a fix nve/uefex
+   E: Can't use compute pressure/uefex without defining a fix nve/uefex
+
+   Self-explanatory.  
+
+   W: The temperature used in compute pressure/uefex is not of style temp/uefex
 
    Self-explanatory.
 
