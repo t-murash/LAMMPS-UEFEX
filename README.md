@@ -33,7 +33,7 @@ Download and install LAMMPS and the UEF package according to the following sites
 
 ```
 wget https://download.lammps.org/tars/lammps-23Jun2022.tar.gz
-tar zxvf lammps-stable.tar.gz
+tar zxvf lammps-23Jun2022.tar.gz
 git clone https://github.com/t-murash/LAMMPS-UEFEX
 cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
 mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
