@@ -66,7 +66,7 @@ Then, build using `cmake` with `-DPKG_UEFEX=yes`
 cd lammps-*
 mkdir build
 cd build
-cmake ../cmake -DBUILD_MPI=yes -DPKG_MOLECULE=yes -DPKG_UEF=yes -DPKG_UEFEX=yes
+cmake ../cmake -DBUILD_MPI=yes -DLAMMPS_SIZES=bigbig -DPKG_MOLECULE=yes -DPKG_UEF=yes -DPKG_UEFEX=yes
 make
 ```
 
