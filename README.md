@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Mar 10, 2023<br>
+Last updated: Mar 16, 2024<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 <!--
@@ -32,8 +32,8 @@ Download and install LAMMPS and the UEF package according to the following sites
 ### Build LAMMPS with cmake
 
 ```
-wget https://download.lammps.org/tars/lammps-stable.tar.gz
-tar xvf lammps-stable.tar.gz
+wget https://download.lammps.org/tars/lammps-23Jun2022.tar.gz
+tar zxvf lammps-stable.tar.gz
 git clone https://github.com/t-murash/LAMMPS-UEFEX
 cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
 mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
