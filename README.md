@@ -73,8 +73,8 @@ make
 
 ### Build LAMMPS with make
 ```
-wget https://download.lammps.org/tars/lammps-stable.tar.gz
-tar xvf lammps-stable.tar.gz
+wget https://download.lammps.org/tars/lammps-23Jun2022.tar.gz
+tar xvf lammps-23Jun2022.tar.gz
 cd lammps-*/src/
 make yes-molecule
 make yes-uef
