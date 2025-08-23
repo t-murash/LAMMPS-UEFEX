@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Mar 16, 2024<br>
+Last updated: Aug 23, 2025<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 <!--
@@ -32,8 +32,8 @@ Download and install LAMMPS and the UEF package according to the following sites
 ### Build LAMMPS with cmake
 
 ```
-wget https://download.lammps.org/tars/lammps-23Jun2022.tar.gz
-tar zxvf lammps-23Jun2022.tar.gz
+wget https://download.lammps.org/tars/lammps-22Jul2025.tar.gz
+tar zxvf lammps-22Jul2025.tar.gz
 git clone https://github.com/t-murash/LAMMPS-UEFEX
 cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
 mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
@@ -73,8 +73,8 @@ make
 
 ### Build LAMMPS with make
 ```
-wget https://download.lammps.org/tars/lammps-23Jun2022.tar.gz
-tar xvf lammps-23Jun2022.tar.gz
+wget https://download.lammps.org/tars/lammps-22Jul2025.tar.gz
+tar xvf lammps-22Jul2025.tar.gz
 cd lammps-*/src/
 make yes-molecule
 make yes-uef
@@ -86,6 +86,7 @@ Then, get this package and install.
 ```
 git clone https://github.com/t-murash/LAMMPS-UEFEX.git
 cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
+mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
 cd lammps-*/src/
 make yes-uefex
 ```
@@ -99,8 +100,9 @@ make mpi mode=static
 
 
 
-### For old version users (29Sep2021, 29Oct20, 3Mar20)
+### For old version users (23Jun2022, 29Sep2021, 29Oct20, 3Mar20)
 You can find `2021-Sep-29`, `2020-Oct-29`, and `2020-Mar-3` directories in `LAMMPS-UEFEX/UEFEX/old`.
+`2022-Jun-23` contains source files compatible with `23Jun2022` of LAMMPS.
 `2021-Sep-29` contains source files compatible with `29Sep2021` of LAMMPS.
 `2020-Oct-29` contains source files compatible with `29Oct2020` of LAMMPS.
 The source files in `2020-Mar-3` are compatible with `3Mar20` of LAMMPS and the more previous versions of LAMMPS.
