@@ -80,8 +80,8 @@ Although this line says "Time-averaged data", the data (`press.txt`) are not tim
 The first column is "Time Step". To obtain "Time", you need to multiply $` \Delta t (=0.01) `$ to this column values.
 The second to seventh columns present the components of "Pressure tensor". "Stress tensor" is the negative value of "Pressure tensor" $` \sigma=-P `$.
 Uniaxial elongational viscosity is calculated by
-$` \eta_{\rm u}=\{\sigma_{zz}-(\sigma_{xx} %2B \sigma_{yy})/2 \} / \dot{\varepsilon} `$.
-Here, $` \dot{\varepsilon}={\rm d}\varepsilon / {\rm d}t (=0.001) `$ is the elongational rate.
+$` \eta_{\rm u}=\{\sigma_{zz}-(\sigma_{xx} + \sigma_{yy})/2 \} / \dot{\varepsilon} `$.
+Here, $` \dot{\varepsilon}={\rm d}\varepsilon / {\rm d}t (=0.001) `$ is the elongational rate (Hencky strain rate).
 
 Since the raw data of the elongational viscosity is noisy,
 we apply Savitzky-Golay filter to smooth out the high frequency noise through `python smooth.py`.
