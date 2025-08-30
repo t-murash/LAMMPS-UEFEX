@@ -29,7 +29,7 @@ run 1000000
 
 write_data N100M100.after1M.data
 
-## dump d1 all custom/uefex 100 dump.lab-frame.lammpstrj id mol type x y z vx vy vz fx fy fz
+## dump d1 all custom 100 dump.lab-frame.lammpstrj id mol type x y z vx vy vz fx fy fz
 ## dump_modify d1 sort id
 ## dump_modify d1 pbc yes
 
@@ -43,6 +43,7 @@ if "$a > 0" then "run 100"
 write_data N100M100.$a.data
 next a
 jump SELF loop
+
 
 
 
