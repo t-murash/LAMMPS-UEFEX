@@ -27,7 +27,7 @@ thermo_style custom step cpu c_rmatrix[*]
 
 run 1000000
 
-## dump d1 all custom/uefex 100 dump.lab-frame.lammpstrj id mol type x y z vx vy vz fx fy fz
+## dump d1 all custom 100 dump.lab-frame.lammpstrj id mol type x y z vx vy vz fx fy fz
 ## dump_modify d1 sort id
 ## dump_modify d1 pbc yes
 
@@ -40,6 +40,7 @@ dump_modify d2 pbc yes
 fix rot all ave/time ${freq} 1 ${freq}  c_rmatrix[*] file rotation.txt
 
 run 10000
+
 
 
 
