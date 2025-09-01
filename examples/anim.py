@@ -1,6 +1,6 @@
 step=100
 frame0=str(step).zfill(3)
-name='ring.N400'
+name='N100M100'
 print(frame0)
 from ovito.io import import_file
 filename=name+'.'+str(frame0)+".data"
