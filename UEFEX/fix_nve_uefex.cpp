@@ -309,7 +309,7 @@ void FixNVEUefex::init()
 }
 
 int FixNVEUefex::modify_param(int narg, char **arg){
-  integrate_flag==0;
+  integrate_flag=0;
   integrate_step=0;
   integrate_max_step=0;
   if (strcmp(arg[0],"u")==0){
@@ -317,7 +317,6 @@ int FixNVEUefex::modify_param(int narg, char **arg){
     double rate=utils::numeric(FLERR,arg[1],false,lmp);
     erate[0]=-0.5*rate;
     erate[1]=-0.5*rate;
-    erate[2]=rate;
     return 2;
   }
 
@@ -326,7 +325,6 @@ int FixNVEUefex::modify_param(int narg, char **arg){
     double rate=utils::numeric(FLERR,arg[1],false,lmp);
     erate[0]=rate;
     erate[1]=rate;
-    erate[2]=-2.0*rate;
     return 2;
   }
 
@@ -335,7 +333,6 @@ int FixNVEUefex::modify_param(int narg, char **arg){
     double rate=utils::numeric(FLERR,arg[1],false,lmp);
     erate[0]=-rate;
     erate[1]=0.0;
-    erate[2]=rate;
     return 2;
   }
 
@@ -351,7 +348,6 @@ int FixNVEUefex::modify_param(int narg, char **arg){
     
     erate[0]=-0.5*irate;
     erate[1]=-0.5*irate;
-    erate[2]=irate;
     return 4;
   }
 
@@ -418,7 +414,7 @@ void FixNVEUefex::final_integrate()
 
   if(integrate_flag>0){
     if(integrate_step>=integrate_max_step){
-      integrate_flag==0;
+      integrate_flag=0;
       integrate_step=0;
       integrate_max_step=0;
     }
@@ -427,7 +423,6 @@ void FixNVEUefex::final_integrate()
   if (integrate_flag==1){
     erate[0]-=0.5*delta_erate;
     erate[1]-=0.5*delta_erate;
-    erate[2]+=delta_erate;
     integrate_step+=1;
   }
 

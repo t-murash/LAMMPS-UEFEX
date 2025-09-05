@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Aug 23, 2025<br>
+Last updated: Sep 5, 2025<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 <!--
@@ -37,36 +37,16 @@ tar zxvf lammps-22Jul2025.tar.gz
 git clone https://github.com/t-murash/LAMMPS-UEFEX
 cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
 mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
-```
+cp LAMMPS-UEFEX/cmake/CMakeLists.txt lammps-*/cmake/.
+cp LAMMPS-UEFEX/cmake/presets/uefex.cmake lammps-*/cmake/presets/.
 
-Edit the following files to include `UEFEX`.
 ```
-lammps-*/cmake/CMakeLists.txt
-lammps-*/cmake/presets/all_off.cmake
-lammps-*/cmake/presets/all_on.cmake
-```
-
-The easiest way is, find `UEF` in the above files and place `UEFEX` below `UEF`.
-Namely, edit the following part
-```
-  TALLY
-  UEF
-  VORONOI
-```
-to
-```
-  TALLY
-  UEF
-  UEFEX
-  VORONOI
-```
-
-Then, build using `cmake` with `-DPKG_UEFEX=yes`
+Then, build
 ```
 cd lammps-*
 mkdir build
 cd build
-cmake ../cmake -DBUILD_MPI=yes -DLAMMPS_SIZES=bigbig -DPKG_MOLECULE=yes -DPKG_UEF=yes -DPKG_UEFEX=yes
+cmake ../cmake -DBUILD_MPI=yes -DLAMMPS_SIZES=bigbig -C ../cmake/presets/uefex.cmake
 make
 ```
 

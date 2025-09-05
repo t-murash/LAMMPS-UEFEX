@@ -39,7 +39,7 @@ namespace LAMMPS_NS {
     virtual void pre_exchange() override;
     virtual void write_restart(FILE *) override; 
     virtual int pack_restart_data(double*);
-    virtual void restart(char *);
+    virtual void restart(char *) override;
     virtual void end_of_step() override;
     virtual void initial_integrate(int) override;
     virtual void final_integrate() override;
