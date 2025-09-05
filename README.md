@@ -46,7 +46,7 @@ Then, build
 cd lammps-*
 mkdir build
 cd build
-cmake ../cmake -DBUILD_MPI=yes -DLAMMPS_SIZES=bigbig -C ../cmake/presets/uefex.cmake
+cmake ../cmake -DBUILD_MPI=yes -C ../cmake/presets/uefex.cmake
 make
 ```
 
