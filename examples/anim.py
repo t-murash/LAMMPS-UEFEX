@@ -1,4 +1,4 @@
-step=100
+step=0
 frame0=str(step).zfill(3)
 name='N100M100'
 print(frame0)
@@ -90,10 +90,13 @@ def modify_pbc(frame,data):
     for i in range(mol_max):
         com[i]/=num_per_mol[i]
     for i in range(mol_max):
-        com_pbc[i]=np.ceil(np.dot(Hinv,com[i])-0.5)
+        com_sp=np.dot(Hinv,com[i])
+        com_s =np.mod(com_sp,1.0)
+        com_pbc[i]=np.rint(com_sp-com_s).astype(int)
     for i in range(num_particles):
         mol_i=mol[i]-1
         opos[i]=pos[i]-np.dot(H,com_pbc[mol_i])
+        #opos[i]=com_pbc[mol_i]
 
 pipeline.modifiers.append(modify_pbc)    
 
