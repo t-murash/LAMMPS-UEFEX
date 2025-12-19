@@ -7,7 +7,7 @@ Authored by:
 [Takahiro Murashima](https://github.com/t-murash)<br>
 Tohoku University, Japan<br>
 Initial commit: Feb 22, 2018<br>
-Last updated: Sep 10, 2025<br>
+Last updated: Dec 19, 2025<br>
 Support provided via [issues](https://github.com/t-murash/LAMMPS-UEFEX/issues) and/or [email](mailto:murasima@cmpt.phys.tohoku.ac.jp).
 
 <!--
@@ -32,31 +32,33 @@ Download and install LAMMPS and the UEF package according to the following sites
 ### Build LAMMPS with cmake
 
 ```
-wget https://download.lammps.org/tars/lammps-22Jul2025.tar.gz
-tar zxvf lammps-22Jul2025.tar.gz
-git clone https://github.com/t-murash/LAMMPS-UEFEX
-cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
-mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
-cp LAMMPS-UEFEX/cmake/CMakeLists.txt lammps-*/cmake/.
-cp LAMMPS-UEFEX/cmake/presets/uefex.cmake lammps-*/cmake/presets/.
+wget https://download.lammps.org/tars/lammps-22Jul2025.tar.gz;
+tar zxvf lammps-22Jul2025.tar.gz;
+mv lammps-22Jul2025 lammps;
+git clone https://github.com/t-murash/LAMMPS-UEFEX;
+cp -r LAMMPS-UEFEX/UEFEX lammps/src/.;
+mv lammps/src/UEFEX/domain.cpp lammps/src/.;
+cp LAMMPS-UEFEX/cmake/CMakeLists.txt lammps/cmake/.;
+cp LAMMPS-UEFEX/cmake/presets/uefex.cmake lammps/cmake/presets/.;
 
 ```
 Then, build
 ```
-cd lammps-*
-mkdir build
-cd build
-cmake ../cmake -DBUILD_MPI=yes -C ../cmake/presets/uefex.cmake
-make
+cd lammps;
+mkdir build;
+cd build;
+cmake ../cmake -DBUILD_MPI=yes -C ../cmake/presets/uefex.cmake;
+make -j $(nproc)
 ```
 
 
 ### Build LAMMPS with make
 ```
-wget https://download.lammps.org/tars/lammps-22Jul2025.tar.gz
-tar xvf lammps-22Jul2025.tar.gz
-cd lammps-*/src/
-make yes-molecule
+wget https://download.lammps.org/tars/lammps-22Jul2025.tar.gz;
+tar xvf lammps-22Jul2025.tar.gz;
+mv lammps-22Jul2025 lammps;
+cd lammps/src/;
+make yes-molecule;
 make yes-uef
 ```
 (`yes-molecule` is necessary for examples.)
@@ -64,17 +66,17 @@ make yes-uef
 Then, get this package and install.
 
 ```
-git clone https://github.com/t-murash/LAMMPS-UEFEX.git
-cp -r LAMMPS-UEFEX/UEFEX lammps-*/src/.
-mv lammps-*/src/UEFEX/domain.cpp lammps-*/src/.
-cd lammps-*/src/
+git clone https://github.com/t-murash/LAMMPS-UEFEX.git;
+cp -r LAMMPS-UEFEX/UEFEX lammps/src/.;
+mv lammps/src/UEFEX/domain.cpp lammps/src/.;
+cd lammps/src/;
 make yes-uefex
 ```
 
 Finally, compile LAMMPS.
 
 ```
-cd lammps-*/src/
+cd lammps/src/;
 make mpi mode=static
 ```
 
@@ -109,3 +111,4 @@ Users of this package are encouraged to cite the following articles in scientifi
 * D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.* (2016) **145** (24) 244903, https://doi.org/10.1063/1.4972894.
 
 * T. Murashima, K. Hagita, T. Kawakatsu, "Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation", *Nihon Reoroji Gakkaishi (J. Soc. Rheol. Jpn.)*  (2018) **46** (5) 207-220, https://doi.org/10.1678/rheology.46.207.
+
