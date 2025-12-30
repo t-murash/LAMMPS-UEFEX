@@ -42,6 +42,8 @@ cp LAMMPS-UEFEX/cmake/CMakeLists.txt lammps/cmake/.;
 cp LAMMPS-UEFEX/cmake/presets/uefex.cmake lammps/cmake/presets/.;
 
 ```
+(If `wget` is not available, use `curl -OL` instead.)
+
 Then, build
 ```
 cd lammps;
@@ -111,4 +113,5 @@ Users of this package are encouraged to cite the following articles in scientifi
 * D. A. Nicholson, G. C. Rutledge, "Molecular simulation of flow-enhanced nucleation in *n*-eicosane melts under steady shear and uniaxial extension", *J. Chem Phys.* (2016) **145** (24) 244903, https://doi.org/10.1063/1.4972894.
 
 * T. Murashima, K. Hagita, T. Kawakatsu, "Elongational Viscosity of Weakly Entangled Polymer Melt via Coarse-Grained Molecular Dynamics Simulation", *Nihon Reoroji Gakkaishi (J. Soc. Rheol. Jpn.)*  (2018) **46** (5) 207-220, https://doi.org/10.1678/rheology.46.207.
+
 
