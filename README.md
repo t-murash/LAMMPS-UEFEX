@@ -38,9 +38,8 @@ mv lammps-22Jul2025 lammps;
 git clone https://github.com/t-murash/LAMMPS-UEFEX;
 cp -r LAMMPS-UEFEX/UEFEX lammps/src/.;
 mv lammps/src/UEFEX/domain.cpp lammps/src/.;
-cp LAMMPS-UEFEX/cmake/CMakeLists.txt lammps/cmake/.;
+sed -i '/^  UEF$/a\  UEFEX' lammps/cmake/CMakeLists.txt;
 cp LAMMPS-UEFEX/cmake/presets/uefex.cmake lammps/cmake/presets/.;
-
 ```
 (If `wget` is not available, use `curl -OL` instead.)
 
