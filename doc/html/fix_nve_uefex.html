@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>fix_nve_uefex</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">fix_nve_uefex</h1>
+</header>
+<div class="index">
+<p>fix nve/uefex</p>
+</div>
+<h1 id="fix-nveuefex-command">fix nve/uefex command</h1>
+<h2 id="syntax">Syntax</h2>
+<pre class="LAMMPS"><code>fix ID group-ID nve/uefex erate edot_x edot_y keyword value ...</code></pre>
+<ul>
+<li><p>ID, group-ID are documented in <a href="fix.html">fix</a>
+command</p></li>
+<li><p>nve/uefex = style name of this fix command</p></li>
+<li><p>erate = required keyword</p></li>
+<li><p>edot_x, edot_y = strain rates in x and y directions (1/time
+units)</p></li>
+<li><p>one or more keyword/value pairs may be appended</p>
+<div class="parsed-literal">
+<dl>
+<dt>keyword = <em>erate</em> or <em>engrate</em> or <em>strain</em></dt>
+<dd>
+<p><em>erate</em> values = edot_x edot_y = true strain rates (required
+unless engrate is used) <em>engrate</em> value = edot_eng = engineering
+strain rate for uniaxial extension <em>strain</em> values = e_x e_y =
+initial strain (for resuming from data files)</p>
+</dd>
+</dl>
+</div></li>
+</ul>
+<h2 id="examples">Examples</h2>
+<pre class="LAMMPS"><code>fix uefex all nve/uefex erate -0.0005 -0.0005
+fix uefex all nve/uefex erate 0.0005 -0.001
+fix uefex all nve/uefex engrate 0.001
+fix uefex all nve/uefex erate -0.0005 -0.0005 strain 0.5 0.5</code></pre>
+<h2 id="description">Description</h2>
+<p>This fix is an extension of the UEF (Uniform Extensional Flow)
+package for LAMMPS. It implements NVE time integration under uniform
+extensional flow fields using the SLLOD equations of motion with
+Kraynik-Reinelt compatible boundary conditions.</p>
+<p>Unlike the original <a href="fix_nh_uef.html">fix nvt/uef</a> which
+uses Nose-Hoover thermostatting, this fix performs NVE integration only.
+A separate thermostat (e.g., <a href="fix_langevin.html">fix
+langevin</a>) can be applied on top. This makes it suitable for Langevin
+dynamics and dissipative particle dynamics (DPD) simulations under
+extensional flow.</p>
+<p>The applied flow field is set by the <em>erate</em> keyword. The
+values <em>edot_x</em> and <em>edot_y</em> correspond to the strain
+rates in the xx and yy directions. The strain rate in the zz direction
+is implicitly <span class="math inline">\(\dot{\varepsilon}_z =
+-(\dot{\varepsilon}_x + \dot{\varepsilon}_y)\)</span> to maintain a
+traceless flow field.</p>
+<p>Common flow types:</p>
+<ul>
+<li>Uniaxial extension: <code>erate -e -e</code> (z-direction
+stretching)</li>
+<li>Biaxial extension: <code>erate e e</code> (xy-plane stretching)</li>
+<li>Planar extension: <code>erate e -e</code> (x stretching, y
+compression)</li>
+</ul>
+<p>The <em>engrate</em> keyword provides an alternative way to specify
+uniaxial extension using the engineering strain rate <span
+class="math inline">\(\dot{\varepsilon}_{\mathrm{eng}}\)</span>. The
+true strain rates are computed as:</p>
+<p><span class="math display">\[\dot{\varepsilon}_x =
+\dot{\varepsilon}_y
+= -\frac{\dot{\varepsilon}_{\mathrm{eng}}}{2(1 +
+\varepsilon_{\mathrm{eng}})}\]</span></p>
+<p>where <span class="math inline">\(\varepsilon_{\mathrm{eng}}\)</span>
+is the cumulative engineering strain.</p>
+<p>The boundary conditions use the same lattice reduction approach as
+the UEF package, based on <code class="interpreted-text"
+role="ref">(Nicholson and Rutledge) &lt;Nicholson_uefex&gt;</code>.</p>
+<hr />
+<p>This fix automatically creates the following computes when it is
+defined:</p>
+<pre class="LAMMPS"><code>compute {fix-ID}_temp group-ID temp/uefex
+compute {fix-ID}_press group-ID pressure/uefex {fix-ID}_temp</code></pre>
+<p>See <a href="compute_temp_uefex.html">compute temp/uefex</a> and <a
+href="compute_pressure_uefex.html">compute pressure/uefex</a> for
+details.</p>
+<h2 id="restart-fix_modify-output-run-startstop-minimize-info">Restart,
+fix_modify, output, run start/stop, minimize info</h2>
+<p>This fix writes the cumulative strain to <code
+class="interpreted-text" role="doc">binary restart files
+&lt;restart&gt;</code>.</p>
+<div class="note">
+<div class="title">
+<p>Note</p>
+</div>
+<p>It is not necessary to set the <em>strain</em> keyword when resuming
+from a restart file. The <em>strain</em> keyword is only needed when
+resuming from a data file.</p>
+</div>
+<p>This fix supports the following <a
+href="fix_modify.html">fix_modify</a> options to change the strain rate
+during a simulation:</p>
+<pre class="LAMMPS"><code>fix_modify uefex u 0.001
+fix_modify uefex b 0.001
+fix_modify uefex p 0.001
+fix_modify uefex ui 0.0005 0.001 100000</code></pre>
+<ul>
+<li><em>u</em> value = edot : switch to uniaxial extension with strain
+rate edot. Sets erate = (-edot/2, -edot/2), so the z-direction stretches
+at rate edot.</li>
+<li><em>b</em> value = edot : switch to biaxial extension with strain
+rate edot. Sets erate = (edot, edot), so the xy-plane stretches at rate
+edot.</li>
+<li><em>p</em> value = edot : switch to planar extension with strain
+rate edot. Sets erate = (-edot, 0), so x compresses and z
+stretches.</li>
+<li><em>ui</em> values = irate frate nsteps : uniaxial extension with
+linearly ramped strain rate. The rate changes from <em>irate</em> to
+<em>frate</em> over <em>nsteps</em> steps.</li>
+</ul>
+<p>These options allow changing the flow type or strain rate without
+restarting the simulation.</p>
+<p>This fix computes a global scalar (the kinetic energy) and a global
+vector.</p>
+<p>This fix is not invoked during <a href="minimize.html">energy
+minimization</a>.</p>
+<h2 id="restrictions">Restrictions</h2>
+<p>This fix is part of the UEFEX package. It is only enabled if LAMMPS
+was built with that package.</p>
+<p>The simulation box must be triclinic. If the box is initially
+orthogonal, convert it before invoking the fix:</p>
+<pre class="LAMMPS"><code>change_box all triclinic</code></pre>
+<p>When the <em>strain</em> keyword is set to zero (or unset), the
+initial simulation box must be cubic.</p>
+<p>This fix requires the modified <code>domain.cpp</code> included in
+the UEFEX package.</p>
+<h2 id="related-commands">Related commands</h2>
+<p><a href="fix_nh_uef.html">fix nvt/uef</a>, <a
+href="fix_langevin.html">fix langevin</a>, <a
+href="fix_barostat_uefex.html">fix barostat/uefex</a>, <a
+href="compute_temp_uefex.html">compute temp/uefex</a>, <a
+href="compute_pressure_uefex.html">compute pressure/uefex</a>, <a
+href="compute_rotation_uefex.html">compute rotation/uefex</a></p>
+<h2 id="default">Default</h2>
+<p>The default for <em>strain</em> is 0 0.</p>
+<hr />
+<div id="Nicholson_uefex">
+<p><strong>(Nicholson and Rutledge)</strong> Nicholson and Rutledge, J
+Chem Phys, 145, 244903 (2016).</p>
+</div>
+<div id="MurashimaHagitaKawakatsu18_uefex">
+<p><strong>(Murashima, Hagita, and Kawakatsu)</strong> Murashima,
+Hagita, and Kawakatsu, Nihon Reoroji Gakkaishi, 46, 207-220 (2018).</p>
+</div>
+</body>
+</html>
