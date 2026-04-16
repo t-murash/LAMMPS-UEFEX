@@ -1,7 +1,7 @@
 /*
   ----------------------------------------------------------------------
   LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
-  https://www.lammps.org/ 
+  https://www.lammps.org/
   Steve Plimpton, sjplimp@sandia.gov, Sandia National Laboratories
 
   Copyright (2003) Sandia Corporation.  Under the terms of Contract
@@ -24,36 +24,18 @@ ComputeStyle(temp/uefex,ComputeTempUefex);
 #ifndef LMP_COMPUTE_TEMP_UEFEX_H
 #define LMP_COMPUTE_TEMP_UEFEX_H
 
-#include "compute_temp.h"
 #include "compute_temp_uef.h"
 
 namespace LAMMPS_NS {
 
-  class ComputeTempUefex : public ComputeTempUef {
-  public:
-    ComputeTempUefex(class LAMMPS *, int, char **);
-    virtual ~ComputeTempUefex()override{}
-    virtual void init() override;
-    virtual double compute_scalar() override; // Murashima 2018/12/25
-    virtual void compute_vector() override; // Murashima 2018/12/25
-    void remove_bias(int i, double *v) override; // Murashima 2019/01/02
-    void restore_bias(int i, double *v) override; // Murashima 2019/01/02
-    
-  };
-
+class ComputeTempUefex : public ComputeTempUef {
+ public:
+  ComputeTempUefex(class LAMMPS *, int, char **);
+  void init() override;
+  void compute_vector() override;
+};
 
 }
 
 #endif
 #endif
-
-/* ERROR/WARNING messages:
-
-   This class inherits most of the warnings from ComputePressure. The
-   only addition is:
-
-   E: Can't use compute temp/uefex without defining a fix nve/uefex
-
-   Self-explanatory.
-
-*/

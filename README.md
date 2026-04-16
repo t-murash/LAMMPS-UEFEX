@@ -37,7 +37,6 @@ tar zxvf lammps-22Jul2025.tar.gz;
 mv lammps-22Jul2025 lammps;
 git clone https://github.com/t-murash/LAMMPS-UEFEX;
 cp -r LAMMPS-UEFEX/UEFEX lammps/src/.;
-mv lammps/src/UEFEX/domain.cpp lammps/src/.;
 sed -i '/^  UEF$/a\  UEFEX' lammps/cmake/CMakeLists.txt;
 cp LAMMPS-UEFEX/cmake/presets/uefex.cmake lammps/cmake/presets/.;
 ```
@@ -69,7 +68,6 @@ Then, get this package and install.
 ```
 git clone https://github.com/t-murash/LAMMPS-UEFEX.git;
 cp -r LAMMPS-UEFEX/UEFEX lammps/src/.;
-mv lammps/src/UEFEX/domain.cpp lammps/src/.;
 cd lammps/src/;
 make yes-uefex
 ```
